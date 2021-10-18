@@ -1,0 +1,44 @@
+.custom-select{
+	width: 80%;
+	padding: 15px;
+	border-radius: 5px;
+	outline: 0;
+	font-size: 1rem;
+	color: rgba(0, 0, 0, .8);
+	border: solid 1px rgba(0, 0, 0, 0.2);
+}
+
+.card-img{
+	width: 100%;
+	height: 200px;
+}
+.price{
+	color: tomato;
+	font-weight: 900;
+	font-size: 1.3rem;
+	text-align: left!important;
+	margin-left: 50px !important
+}
+.shop{
+	width: 35px;
+	height: 35px;
+	/*border-radius: 50%;*/
+}
+
+.img-panier{
+	width: 60px;
+	height: auto;
+	display: inline-block !important;
+	vertical-align: middle;
+	margin-right: 20px;
+}
+
+.skel{
+
+	margin: 0px !important;
+	height: 500px !important;
+}
+
+.skel-img{
+	height: 500px !important;
+}
