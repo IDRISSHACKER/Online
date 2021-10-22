@@ -82,6 +82,7 @@ function UploadArticle(){
 					        <Grid item xs={12} sm={12} md={12}>
 					          <Upload remote={getFileName} />
 					        </Grid>
+							
 					          <Grid item xs={12} sm={12} md={12}>
 					            <TextField
 					              fullWidth
@@ -91,6 +92,9 @@ function UploadArticle(){
 								  onChange={(e)=>setTitle(e.target.value)}
 					            />
 					          </Grid>
+							  <Grid item xs={12} sm={12} md={12}>
+
+							  </Grid>
 							  <Grid item xs={12} sm={12} md={12}>
 							  <Stack direction="row" alignItems="center" justifyContent="space-between" mb={0}>
 							 	<Typography>Selectionner une categorie </Typography>

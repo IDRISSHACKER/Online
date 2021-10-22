@@ -19,6 +19,7 @@ use App\Config;
 use App\table\Users;
 use App\table\Home;
 use App\table\Article;
+use App\table\Avis;
 use App\table\Categorie;
 use App\table\Image;
 
@@ -92,5 +93,9 @@ if($page === "home/" OR $page === "home"){
 }else if($page === "setCategory/" OR $page === "setCategory"){
 
 	Categorie::setCategory();
+
+}else if($page === "setAvi/" OR $page === "setAvi"){
+
+	Avis::setAvi();
 
 }

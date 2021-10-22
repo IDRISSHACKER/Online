@@ -66,3 +66,22 @@ hr{
 
 	padding: 20px;
 }
+
+.modal-rating{
+
+	max-width: 900px;
+	width: 500px;
+	min-width: 200px;
+}
+
+.text-rating{
+
+	width: 100% !important;
+}
+
+.msg{
+
+	background: #f4f7fa;
+	padding: 1px;
+	border-radius: 10px;
+}

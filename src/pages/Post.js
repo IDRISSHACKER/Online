@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import { Grid, Card, Stack, Link, Container, Typography, TextFiel, Button, TextField, CardHeader } from '@material-ui/core'
+import { Grid, Card, Stack, Link, Container, Typography, TextFiel, Button, TextField, CardHeader, Breadcrumbs } from '@material-ui/core'
 import settings from "../_mocks_/settings"
 import { getIdInUrl } from "../utils/formatText"
 import axios from "axios"
@@ -39,7 +39,7 @@ function Post() {
 				<br />
 				<br />
 				<br />
-				<Breadcrumb currentpath={"/"} text="Acceuil" />
+				<Breadcrumb currentpath={"/"} text="Acceuil" post={post} />
 				<br />
 					<div>
 						<Grid container spacing={3}>

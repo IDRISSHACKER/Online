@@ -1,14 +1,16 @@
 import {Link as RouterLink} from "react-router-dom"
-import {Stack, Link} from "@material-ui/core"
+import {Stack, Link, Breadcrumbs, Chip} from "@material-ui/core"
+import HomeOutlined from "@mui/icons-material/HomeOutlined"
 
-export default function Breadcrumb({currentpath, text}){
+export default function Breadcrumb({currentpath, text, post}){
 
 	return <>
 		<div className="breadcrumb">
 			<Stack>
-				<Link underline="none" variant="subtitle2" component={RouterLink} to={currentpath}>
-					{"<"}{text}
-				</Link>
+				<Breadcrumbs>
+					<Chip label={<><Link underline={"none"} to={"/store"} component={RouterLink} >Store</Link></>} />
+					<Chip label={<Link underline={"none"}>{post.title}</Link>} />
+				</Breadcrumbs>
 			</Stack>
 		</div>
 	</>
