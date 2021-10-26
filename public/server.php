@@ -116,4 +116,8 @@ if($page === "home/" OR $page === "home"){
 
 	Avis::getAvis();
 
+}else if($page === "updateAvi/" OR $page === "updateAvi"){
+
+	Avis::updateAvi();
+
 }

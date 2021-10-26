@@ -58,3 +58,19 @@ export function sizeDatas(datas){
 
   return size
 }
+
+export function evaluate(evaluation){
+  let total = 0;
+  let count = 0;
+
+  evaluation.forEach((eva)=>{
+
+    total += parseFloat(eva.note)
+    count += 1
+
+  })
+
+
+  return (total/count)
+
+}

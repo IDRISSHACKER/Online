@@ -2,11 +2,13 @@ import {Link as RouterLink} from "react-router-dom"
 import {Card, CardContent, CardMedia, Link, Rating, Typography} from '@material-ui/core'
 import settings from "../../_mocks_/settings"
 import {formatTitle} from "../../utils/formatText"
-import {fFcfa} from "../../utils/formatNumber"
-import { useDispatch } from "react-redux"
+import {evaluate, fFcfa} from "../../utils/formatNumber"
+import { useDispatch, useSelector } from "react-redux"
 import { getPosts } from "src/action/posts.action"
 import { random } from "lodash"
 import { getAvis } from "src/action/avis.action"
+import { isEmpty } from "src/utils/isEmpty"
+import { useState } from "react"
 
 
 const infos = new settings()
@@ -31,7 +33,8 @@ export default function Article({post, parent}){
 
 	}
 
-	const notation = random(5, true)
+	const [avis, setAvis] = useState(useSelector(state=>state.aviReducer))
+	const notation = 3
 	const step = 0.5
 
 	return(
@@ -58,7 +61,9 @@ export default function Article({post, parent}){
 						{fFcfa(`${post.price}`)}
 					</Typography>
 					<Typography variant="h5" className="price">
-						<Rating name="half-rating" defaultValue={notation} precision={step} readOnly/>
+						 
+							<Rating name="half-rating" defaultValue={3} precision={step} readOnly/>
+
 					</Typography>
 
 					<Typography variant="body2" className="stock">

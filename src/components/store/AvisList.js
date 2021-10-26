@@ -1,9 +1,11 @@
 import { Grid, Typography } from "@material-ui/core";
+import { useState } from "react";
 import { isEmpty } from "src/utils/isEmpty";
-import Avi from "./Avi";
+import Avi from "./Avi"; 
 
 
-export default function AvisList({avis}){
+
+export default function AvisList({avis, post}){
 
     return <>
         <Grid container>
@@ -13,7 +15,7 @@ export default function AvisList({avis}){
             </Grid>
             {!isEmpty(avis) && avis.map((avi, index)=>(
                 <Grid className="w100" key={index} item sm={12} md={12} xl={12} >
-                    <Avi className="w100" avi={avi} />
+                    <Avi className="w100" avi={avi} post={post} />
                     <br />
                 </Grid>
             ))}

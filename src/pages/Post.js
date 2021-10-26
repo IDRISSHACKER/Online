@@ -14,7 +14,9 @@ import { isEmpty } from "src/utils/isEmpty"
 import { Skeleton } from "react-loading-skeleton"
 import AvisList from "src/components/store/AvisList"
 import { getAvis } from "src/action/avis.action"
-import { extendWith } from "lodash"
+import { extendWith, round } from "lodash"
+import { evaluate } from "src/utils/formatNumber"
+import Modal from "../components/store/Modal"
 //import "../css/master.scss"
 
 const infos = new settings()
@@ -24,10 +26,17 @@ function Post() {
 	const dispatch = useDispatch()
 
 	const [load, setLoad] = useState(1);
+	const [open, setOpen] = useState(false)
 
 	const posts = useSelector(state => state.postsReducer)
 
 	const id = getIdInUrl(window.location.href)
+
+	const setOpened =  function(value = true){
+		setOpen(value)
+		return value
+	}
+
 
 	const dis = async()=>{
 		return await dispatch(getAvis(id))
@@ -44,7 +53,20 @@ function Post() {
 		setLoad(0)
 	},200)
 
+	const handlerRating = (ev)=>{
+		const connected = localStorage.getItem("connected") ? parseInt(localStorage.getItem("connected")) : 0
+		if(connected){
+			setOpen(true)
+			setOpened(true)
+			//
+		}else{
 
+			ev.preventDefault()
+			navigate("/login", {replace:true})
+			
+		}
+
+	  }
 	const avis = useSelector(state=>state.aviReducer)
 
 	return <div>
@@ -63,7 +85,7 @@ function Post() {
 								<ArticleImg Img={post.img} />
 							</Grid>
 							<Grid item md={5} xs={12} sm={6}>
-								<ArticleDesc Desc={post} />
+								<ArticleDesc Desc={post} avisp={avis} setOpene={setOpened}/>
 							</Grid>
 							<Grid item md={12} xs={12} sm={12}>
 								{load === 0?
@@ -74,15 +96,22 @@ function Post() {
 							<Grid item md={4} xs={12} sm={4}>
 								<br />
                 				<Typography>
-									<Rating value={4} defaultValue={0} size="small" readOnly/>
-									<span>4 sur 5</span>
+									<Rating value={round(evaluate(avis),2)} defaultValue={0} size="small" readOnly/>
+									<span>{round(evaluate(avis),2)} sur 5</span>
 								</Typography>
 								<Typography variant="h6">Evaluer ce produit</Typography>
 								<Typography variant="body2">Partargez votre opignion avec les autres clients</Typography>
-								<Button variant="outlined" color='inherit' size='small'>Ecrire un commentaire client</Button>
+								<Button onClick={handlerRating} variant="outlined" color='inherit' size='small'>Ecrire un commentaire client</Button>
+								<span>
+									{open ? 
+										<Modal opened={setOpened} post={post}/>
+										:
+										<></>
+									}
+								</span>
 							</Grid>
 							<Grid item md={8} xs={12} sm={8}>
-								{<AvisList avis={avis} />}
+								{<AvisList post={post} avis={avis} />}
 							</Grid>
 						</Grid>
 

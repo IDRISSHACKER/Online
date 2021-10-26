@@ -44,4 +44,14 @@ class Avis extends Table
         echo json_encode($avis);
     }
 
+    public static function updateAvi(){
+
+        $comment_id = $_POST["comment_id"];
+        $title = $_POST["title"];
+        $comment = $_POST["comment"];
+
+        return self::save("UPDATE `avis` SET `title` = '$title', `comment` = '$comment' WHERE `avis`.`id` = $comment_id");
+
+    }
+
 }
