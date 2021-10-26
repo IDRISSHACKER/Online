@@ -11,16 +11,13 @@ use App\App;
 class Users extends Table{
 
     public static function getUsers(){
-        return self::query("SELECT users.id, users.name, users.surname, users.pseudo, users.email, users.tel, users.password, users.created_at, users.updated_at, roles.role_name as role FROM users LEFT JOIN roles ON users.role_id = roles.id WHERE users.deleted = 0");
+        $id = $_POST["id"];
+        return self::query("SELECT users.id, users.name, users.surname, users.pseudo, users.email, users.tel, users.password, users.created_at, users.updated_at, roles.role_name as role FROM users LEFT JOIN roles ON users.role_id = roles.id WHERE id = $id")[0];
     }
 
     public static function getUserInfos(){
-        if(1 !== 0){
-            $id = 1;
-            return self::query("SELECT users.id, users.name, users.surname, users.pseudo, users.email, users.tel, users.password, users.created_at, users.updated_at, roles.role_name as role FROM users LEFT JOIN roles ON users.role_id = roles.id WHERE users.deleted = 0 AND users.id = $id "); 
-        }else{
-            return $_SESSION;
-        }  
+        $id = $_POST["id"];
+        return self::query("SELECT users.id, users.name, users.surname, users.pseudo, users.email, users.tel, users.password, users.created_at, users.updated_at, roles.role_name as role FROM users LEFT JOIN roles ON users.role_id = roles.id WHERE users.id = $id ");  
     }
 
     public static function getEmail($email){
@@ -59,6 +56,7 @@ class Users extends Table{
     }
 
     public static function connexion(){
+
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
 
@@ -72,7 +70,6 @@ class Users extends Table{
                 
                 $_SESSION['id'] = $infos[0]->id;
                 $_SESSION['connected'] = 1;
-                $_SESSION["p"] = $infos[0]->id;
 
 
                 return ["data"=>$infos,

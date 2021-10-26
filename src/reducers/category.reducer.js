@@ -1,6 +1,6 @@
 import { GET_CTG, SET_CTG } from "src/action/category.action"
 
-const initialState = {}
+const initialState = []
 
 export default function ctgReducer(state = initialState, action){
     switch(action.type){

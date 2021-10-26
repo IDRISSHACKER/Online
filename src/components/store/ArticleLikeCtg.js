@@ -39,7 +39,7 @@ class ArticleLikeCtg extends React.Component{
 					<hr />
 					<Articles posts={this.state.post} parenturl="post" />
 				</div>:
-				<div>loading1..</div>
+				<div>chargement des articles..</div>
 			}
 		</div>
 	}

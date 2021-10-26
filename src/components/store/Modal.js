@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField, Typography} from "@material-ui/core"
 import { useDispatch } from 'react-redux';
-import { setAvi as setAvis } from 'src/action/avis.action';
+import { getAvis, setAvi as setAvis } from 'src/action/avis.action';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -13,7 +13,7 @@ export default function Modal({opened, post, parent_note}) {
   const dispatch = useDispatch()
 
   const [open, setOpen] = React.useState(true);
-  const [note, setNote] = React.useState("3");
+  const [note, setNote] = React.useState(parent_note);
   const [motif, setMotif] = React.useState("");
   const [avi, setAvi] = React.useState("");
 
@@ -22,21 +22,22 @@ export default function Modal({opened, post, parent_note}) {
   };
 
   const handleClose = () => {
-    setOpen(false);
-    opened(false)
+    const timeout = 400
+    setTimeout(() => {
+      setOpen(false);
+      opened(false)
+    }, timeout);
   };
 
 
   const handleSend = ()=>{
 
     const data = new FormData
+    data.append("id", localStorage.getItem('id') ? localStorage.getItem('id') : 1)
     data.append("note", note)
+    data.append("post_id", post.id)
     data.append("title", motif)
     data.append("comment", avi)
-
-    console.log("note", note)
-    console.log("title", motif)
-    console.log("comment", avi)
 
     if(note && motif && avi){
 
@@ -47,11 +48,10 @@ export default function Modal({opened, post, parent_note}) {
         setAvi("")
         setMotif("")
         
-
-        handleClose()
-        opened(false)
-        setOpen(false)
       }
+
+      handleClose()
+
 
     }else{
 
@@ -60,9 +60,15 @@ export default function Modal({opened, post, parent_note}) {
     }
 
     console.log("Avis prise en compte ")
+    dispatch(getAvis(post.id))
+    dispatch(getAvis(post.id))
+    dispatch(getAvis(post.id))
+    dispatch(getAvis(post.id))
+    dispatch(getAvis(post.id))
+    dispatch(getAvis(post.id))
     
   }
-
+  //dispatch(getAvis(post.id))
   return (
     <div>
       <Dialog

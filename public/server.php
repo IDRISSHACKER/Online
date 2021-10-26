@@ -1,10 +1,15 @@
 <?php
-#start the session for users
-session_start();
-
 #autorise external request
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Max-Age: 86400');  
+header("Access-Control-Allow-Methods: *");
+
+#start the session for users
+session_start();
+
+$_SESSION["p"] = "idriss";
 
 #real path
 define("ROOT", dirname(__DIR__));
@@ -13,7 +18,7 @@ define("ROOT", dirname(__DIR__));
 require ROOT.'/'.'App/autoload.php';
 autoload::register();
 
-#define the differents class tu use
+#define the differents class to use
 use App\Database;
 use App\Config;
 use App\table\Users;
@@ -42,6 +47,10 @@ if($page === "home/" OR $page === "home"){
 
 	var_dump($_SESSION);
 
+}if($page === "ses/" OR $page === "ses"){
+
+	$_SESSION["key".time()] = "idriss";
+
 }else if($page === "users/" OR $page === "users"){
 	$users = Users::getUsers();
 	echo json_encode($users);
@@ -58,8 +67,13 @@ if($page === "home/" OR $page === "home"){
 
 }else if($page === "connexion/" OR $page === "connexion"){
 
+	$email = htmlspecialchars($_POST['email']);
 	$infos = Users::connexion();
+	if($infos["code"] === 1){
+		$_SESSION['user'] = $infos['data'];
+	}
 	echo json_encode($infos);
+
 
 }else if($page === "appInfos/" OR $page === "appInfos"){
 
@@ -97,5 +111,9 @@ if($page === "home/" OR $page === "home"){
 }else if($page === "setAvi/" OR $page === "setAvi"){
 
 	Avis::setAvi();
+
+}else if($page === "getAvis/" OR $page === "getAvis"){
+
+	Avis::getAvis();
 
 }

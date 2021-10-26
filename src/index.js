@@ -18,6 +18,7 @@ import { getPosts } from './action/posts.action';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { getCtg } from './action/category.action';
+import { getUser } from './action/user.action';
 
 const store = createStore(
   rootReducer,
@@ -30,6 +31,12 @@ store.dispatch(
 store.dispatch(
   getCtg()
 )
+
+if(localStorage.getItem("id")){
+  store.dispatch(
+    getUser()
+  )
+}
 // ----------------------------------------------------------------------
 
 ReactDOM.render(

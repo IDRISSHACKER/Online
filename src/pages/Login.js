@@ -8,10 +8,13 @@ import axios from 'axios'
 import settings from "../_mocks_/settings"
 import Loading from "../utils/Loading"
 import Page from "../components/Page"
+import { useDispatch } from 'react-redux';
+import { getUser } from 'src/action/user.action';
 // ----------------------------------------------------------------------
 
 export default function Login() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [emaile, setEmaile] = useState(0);
   const [password, setPassword] = useState("");
@@ -74,7 +77,7 @@ export default function Login() {
         }else{
           setEmaile(1)
       }
-     
+      
 
       if((emaile+passworde)<1 && email.length > 1 && password.length > 1){
 
@@ -88,14 +91,22 @@ export default function Login() {
               setEmaile(1)
               setPassworde(1)
             }
-            if (data.code === 1 && data !== null){      
+            if (data.code === 1 && data !== null){ 
+ 
+              localStorage.setItem("id", data.data[0].id)
+              dispatch(getUser(data.data[0].id))
+
               setEmail("")
               setPassword("")
-              window.location = "/store"
               localStorage.setItem("connected",1)
               if(parseInt(data.data[0].role_id) === 1){
                 localStorage.setItem("admin", 1)
               }
+
+
+              setTimeout(()=>{
+                window.location = "/store"
+              },200)
             }else{
               setEmaile(1)
               setPassworde(1)

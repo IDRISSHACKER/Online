@@ -1,6 +1,6 @@
 import { ADD_POST, GET_POSTS } from "src/action/posts.action";
 
-const initialState = {}
+const initialState = []
 
 export default function postsReducer(state = initialState, action){
     switch(action.type){

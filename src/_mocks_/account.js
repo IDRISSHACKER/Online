@@ -1,9 +1,10 @@
 // ----------------------------------------------------------------------
-const account = {
+const account = ()=>{
+  return{
   displayName: "idiss",
   email: "idrisscoder@gmail.com",
   password: "....",
-  photoURL: '/static/mock-images/avatars/avatar_default.jpg'
+  photoURL: '/static/mock-images/avatars/avatar_default.jpg'}
 };
 
 export default account;

@@ -12,6 +12,7 @@ const setting = new settings()
 export default function ArticleDesc({Desc}){
 	const navigate = useNavigate()
 	const [open, setOpen] = useState(false)
+	const [rat, setRat] = useState('0')
 
 	const setOpened =  function(value = true){
 		setOpen(value)
@@ -24,7 +25,8 @@ export default function ArticleDesc({Desc}){
 	    options.push(<option key={i} value={i}>{i}</option>)
 	  }
 
-	  const handlerRating = (ev)=>{
+	  const handlerRating = (ev, newRat)=>{
+		  setRat(`${newRat}`)
 
 		const connected = localStorage.getItem('connected') ? parseInt(localStorage.getItem('connected')) : 0
 
@@ -41,7 +43,7 @@ export default function ArticleDesc({Desc}){
 
 	  }
 
-	  const evaluation = round(random(5, true),1) 
+	  const evaluation = 4 
 
 	return <>
 		<div>
@@ -55,12 +57,12 @@ export default function ArticleDesc({Desc}){
 			<Typography variant="h5" contain="h3">
 				<span>note globale: </span>
 				<span>
-					<Rating defaultValue={evaluation} precision={0.5} onChange={handlerRating} parent_note={5} />
+					<Rating defaultValue={0} value={rat} size="large" precision={0.5} onChange={handlerRating}  />
 				</span>
-				<span> {evaluation}/5 evaluation</span>
+				<span> 1 evaluation</span>
 				<span>
 					{open ? 
-						<Modal opened={setOpened} post={Desc} />
+						<Modal opened={setOpened} post={Desc} parent_note={rat}/>
 						:
 						<></>
 					}

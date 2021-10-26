@@ -6,6 +6,7 @@ import {fFcfa} from "../../utils/formatNumber"
 import { useDispatch } from "react-redux"
 import { getPosts } from "src/action/posts.action"
 import { random } from "lodash"
+import { getAvis } from "src/action/avis.action"
 
 
 const infos = new settings()
@@ -19,11 +20,11 @@ export default function Article({post, parent}){
 	const handleClick = (e)=>{
 
 		dispatch(getPosts())
+		//dispatch(getAvis(post.id))
 
 		if(parent === "post"){
 			
 			e.preventDefault()
-
 			window.location = location
 
 		}

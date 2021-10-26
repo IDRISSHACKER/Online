@@ -9,8 +9,9 @@ import { alpha } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@material-ui/core';
 // components
 import MenuPopover from '../../components/MenuPopover';
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty } from 'lodash';
 //
-import account from '../../_mocks_/account';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
 
@@ -54,6 +56,8 @@ export default function AccountPopover() {
     localStorage.clear();
     window.location = "/login";
   }
+
+  const account = useSelector((state)=>state.userReducer)
 
   return (
     <>
@@ -77,7 +81,7 @@ export default function AccountPopover() {
           })
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar>{!isEmpty(account) && account[0].surname[0].toLocaleUpperCase()}</Avatar>
       </IconButton>
 
       <MenuPopover
@@ -88,10 +92,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {!isEmpty(account) && account[0].surname}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {!isEmpty(account) && account[0].email}
           </Typography>
         </Box>
 

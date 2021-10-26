@@ -29,7 +29,7 @@ function Store(){
 				<br/>
 				<Articles posts={posts} />
 				<br />
-				<CircularProgressbar value={percentage} text={`${percentage}%`} />;
+				{/**<CircularProgressbar value={percentage} text={`${percentage}%`} />**/}
 			</Container>
 		</Page>
 	</div>
