@@ -49,7 +49,7 @@ if($page === "home/" OR $page === "home"){
 
 }if($page === "ses/" OR $page === "ses"){
 
-	$_SESSION["key".time()] = "idriss";
+	//
 
 }else if($page === "users/" OR $page === "users"){
 	$users = Users::getUsers();

@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import { Grid, Card, Stack, Link, Container, Typography, TextFiel, Button, TextField, CardHeader, Breadcrumbs, Rating } from '@material-ui/core'
+import { Grid, Card, Stack, Link, Container, Typography, Chip,TextFiel, Button, TextField, CardHeader, Breadcrumbs, Rating } from '@material-ui/core'
 import settings from "../_mocks_/settings"
 import { getIdInUrl } from "../utils/formatText"
 import axios from "axios"
@@ -15,8 +15,9 @@ import { Skeleton } from "react-loading-skeleton"
 import AvisList from "src/components/store/AvisList"
 import { getAvis } from "src/action/avis.action"
 import { extendWith, round } from "lodash"
-import { evaluate } from "src/utils/formatNumber"
+import { evaluate, sizeDatas } from "src/utils/formatNumber"
 import Modal from "../components/store/Modal"
+import { MessageOutlined } from "@mui/icons-material"
 //import "../css/master.scss"
 
 const infos = new settings()
@@ -93,15 +94,21 @@ function Post() {
 									<div>loading...</div>
 								}
 							</Grid>
+							<Grid item md={12} xs={12} sm={12}>
+								<Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
+									<Typography variant="h6" containt="h2">Commentaires clients</Typography>
+									<Chip label={sizeDatas(avis)} />
+								</Stack>
+								<hr />
+							</Grid>
 							<Grid item md={4} xs={12} sm={4}>
-								<br />
                 				<Typography>
 									<Rating value={round(evaluate(avis),2)} defaultValue={0} size="small" readOnly/>
 									<span>{round(evaluate(avis),2)} sur 5</span>
 								</Typography>
 								<Typography variant="h6">Evaluer ce produit</Typography>
 								<Typography variant="body2">Partargez votre opignion avec les autres clients</Typography>
-								<Button onClick={handlerRating} variant="outlined" color='inherit' size='small'>Ecrire un commentaire client</Button>
+								<Button startIcon={<MessageOutlined color={"primary"} />} onClick={handlerRating} variant="outlined" color={"inherit"} size='small'>Ecrire un commentaire client</Button>
 								<span>
 									{open ? 
 										<Modal opened={setOpened} post={post}/>

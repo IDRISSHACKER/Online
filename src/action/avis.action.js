@@ -5,6 +5,7 @@ import settings from "src/_mocks_/settings"
  export const SET_AVI = "SET_AVI"
  export const GET_AVIS = "GET_AVIS"
  export const UPDATE_AVI = "UPDATE_AVI"
+ export const PLAINTE_AVI = "PLAINTE_AVI"
 
  const set = new settings().init()
 
@@ -31,5 +32,13 @@ import settings from "src/_mocks_/settings"
        axios.post(set.APP_URL + '?page=updateAvi', data)
        .then(res=>dispatch({ type: UPDATE_AVI, payload: res.data }))
        .catch(err=>console.log(err))
+    }
+}
+
+export const setPlainteAvi = (data)=>{
+    return (dispatch)=>{
+        axios.post(set.APP_URL + '?page=setPlainteAvi', data)
+        .then(res=>dispatch({ type: PLAINTE_AVI, payload: res.data}))
+        .catch(err=>console.log(err))
     }
 }

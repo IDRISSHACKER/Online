@@ -5,13 +5,20 @@ import ModeEditTwoToneIcon from '@mui/icons-material/ModeEditTwoTone';
 import AnnouncementTwoToneIcon from '@mui/icons-material/AnnouncementTwoTone';
 
 import ModalEditAvi from "./ModalEditAvi"
+import ModalSignal from "./ModalSignal";
 
 export default function Avi({avi, post}){
     
     const [open, setOpen] =  useState(false)
+    const [openPlainte, setOpenPlainte] = useState(false)
 
     const setOpened =  function(value = true){
 		setOpen(value)
+		return value
+	}
+
+    const setOpenedPlainte =  function(value = true){
+		setOpenPlainte(value)
 		return value
 	}
 
@@ -19,6 +26,10 @@ export default function Avi({avi, post}){
 
     const handlerEdit = ()=>{
         setOpened(true)
+    }
+
+    const handlerSignal = ()=>{
+        setOpenPlainte(true)
     }
 
     return <>
@@ -31,7 +42,7 @@ export default function Avi({avi, post}){
                 <IconButton onClick={handlerEdit} title="Editer votre commentaire">
                     <ModeEditTwoToneIcon color="primary" />
                 </IconButton>:
-                <IconButton title="Signaler ce commentaire">
+                <IconButton onClick={handlerSignal} title="Signaler ce commentaire">
                     <AnnouncementTwoToneIcon variant="primary" />
                 </IconButton>
             }
@@ -41,6 +52,13 @@ export default function Avi({avi, post}){
                     {avi.comment}
                     {open?
                         <ModalEditAvi post={post} opened={setOpened} oldAvi={avi} />:<span></span>
+                    }
+                    {openPlainte?
+
+                        <ModalSignal opened={setOpenedPlainte} post={post} avi={avi} />:
+
+                        <span></span>
+
                     }
                 </Typography>
             </CardContent>

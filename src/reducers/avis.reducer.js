@@ -1,4 +1,4 @@
-import { GET_AVIS, SET_AVI, UPDATE_AVI } from "src/action/avis.action"
+import { GET_AVIS, SET_AVI, UPDATE_AVI, PLAINTE_AVI } from "src/action/avis.action"
 
 const initialState = []
 
@@ -9,6 +9,8 @@ export default function aviReducer(state = initialState, action){
         case GET_AVIS:
             return action.payload
         case UPDATE_AVI:
+            return state
+        case PLAINTE_AVI:
             return state
         default:
             return state
