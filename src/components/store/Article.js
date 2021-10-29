@@ -1,3 +1,4 @@
+import { Spring, useSpring, animated } from "react-spring"
 import {Link as RouterLink} from "react-router-dom"
 import {Card, CardContent, CardMedia, Link, Rating, Typography} from '@material-ui/core'
 import settings from "../../_mocks_/settings"
@@ -36,42 +37,52 @@ export default function Article({post, parent}){
 	const [avis, setAvis] = useState(useSelector(state=>state.aviReducer))
 	const notation = 3
 	const step = 0.5
+	//const props = useSpring({opacity:1,from:{opacity: 0}})
+
 
 	return(
+			<Spring
+				from={{opacity:0, marginTop:-500}}
+				to={{opacity:1, marginTop:0}}
+			>
+				{(props)=>(
+				<animated.div style={props}>
+					<Link underline="none" variant="subtitle2" onClick={handleClick} component={RouterLink} to={location}>
+						<Card className="post">
+							<CardMedia
+								title = {post.title}
+								image = {`${infos.init().APP_FOLDER}/img/posts/${post.img}`}
+								className = "apercu"
+								alt = {post.img}
+							/>
+							<CardContent>
+								<Typography gutterBottom variant="h6" component="h2">
+									{formatTitle(post.title,50)}
+								</Typography>
+								{/*<Typography variant="body2" color="textSecondary" component="p">
+								<Link to="/" underline="none" component={RouterLink}>
+									<span>{post.category_name}</span>
+								</Link>
+								</Typography>*/}
 
-		<Link underline="none" variant="subtitle2" onClick={handleClick} component={RouterLink} to={location}>
-			<Card className="post">
-				<CardMedia
-					title = {post.title}
-					image = {`${infos.init().APP_FOLDER}/img/posts/${post.img}`}
-				 	className = "apercu"
-				 	alt = {post.img}
-				 />
-				<CardContent>
-					<Typography gutterBottom variant="h6" component="h2">
-			        	{formatTitle(post.title,50)}
-			        </Typography>
-			        {/*<Typography variant="body2" color="textSecondary" component="p">
-			          <Link to="/" underline="none" component={RouterLink}>
-			          	<span>{post.category_name}</span>
-			          </Link>
-			        </Typography>*/}
+								<Typography variant="h5" className="price">
+									{fFcfa(`${post.price}`)}
+								</Typography>
+								<Typography variant="h5" className="price">
+									
+										<Rating name="half-rating" defaultValue={3} precision={step} readOnly/>
 
-					<Typography variant="h5" className="price">
-						{fFcfa(`${post.price}`)}
-					</Typography>
-					<Typography variant="h5" className="price">
-						 
-							<Rating name="half-rating" defaultValue={3} precision={step} readOnly/>
+								</Typography>
 
-					</Typography>
+								<Typography variant="body2" className="stock">
+									il ne reste plus que {post.qtt} en stock
+								</Typography>
 
-					<Typography variant="body2" className="stock">
-						il ne reste plus que {post.qtt} en stock
-					</Typography>
-
-				</CardContent>
-			</Card>
-		</Link>
+							</CardContent>
+						</Card>
+					</Link>
+				</animated.div>
+				)}
+			</Spring>
 	)
 }
