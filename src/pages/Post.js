@@ -18,6 +18,7 @@ import { extendWith, round } from "lodash"
 import { evaluate, sizeDatas } from "src/utils/formatNumber"
 import Modal from "../components/store/Modal"
 import { MessageOutlined } from "@mui/icons-material"
+import LikeCtgCaroussel from "src/components/store/likeCtg.caroussel"
 //import "../css/master.scss"
 
 const infos = new settings()
@@ -26,7 +27,7 @@ function Post() {
 
 	const dispatch = useDispatch()
 
-	const [load, setLoad] = useState(1);
+	const [load, setLoad] = useState("1")
 	const [open, setOpen] = useState(false)
 
 	const posts = useSelector(state => state.postsReducer)
@@ -39,20 +40,21 @@ function Post() {
 	}
 
 
-	const dis = async()=>{
-		return await dispatch(getAvis(id))
+	const dis = ()=>{
+		return dispatch(getAvis(id))
 	}
 
 
 	const post = !isEmpty(posts) && posts.find((elem)=>parseInt(elem.id)===parseInt(id))
 
 	let re = setTimeout(function(){
-		clearTimeout(re)
-		if(load === 1){
+		if(load == "1"){
 			dis()
 		}
-		setLoad(0)
-	},200)
+		setLoad("")
+		clearTimeout(re)
+
+	},500)
 
 	const handlerRating = (ev)=>{
 		const connected = localStorage.getItem("connected") ? parseInt(localStorage.getItem("connected")) : 0
@@ -89,8 +91,8 @@ function Post() {
 								<ArticleDesc Desc={post} avisp={avis} setOpene={setOpened}/>
 							</Grid>
 							<Grid item md={12} xs={12} sm={12}>
-								{load === 0?
-									<ArticleLikeCtg ctgId={post.ctgId} post_id={post.id} />:
+								{load === "0" || load == "" ?
+									<LikeCtgCaroussel ctgId={post.ctgId} post_id={post.id} />:
 									<div>loading...</div>
 								}
 							</Grid>
@@ -103,8 +105,8 @@ function Post() {
 							</Grid>
 							<Grid item md={4} xs={12} sm={4}>
                 				<Typography>
-									<Rating value={round(evaluate(avis),2)} defaultValue={0} size="small" readOnly/>
-									<span>{round(evaluate(avis),2)} sur 5</span>
+									<Rating value={round(evaluate(avis),3)} defaultValue={0} size="small" readOnly/>
+									<span>{sizeDatas(avis) == 0 ? 0 : round(evaluate(avis),2)} sur 5</span>
 								</Typography>
 								<Typography variant="h6">Evaluer ce produit</Typography>
 								<Typography variant="body2">Partargez votre opignion avec les autres clients</Typography>

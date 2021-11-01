@@ -10,6 +10,7 @@ import { getPosts } from "src/action/posts.action"
 import Skeleton, {SkeletonTheme } from "react-loading-skeleton"
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import HomeCaroussel from "src/components/store/Home.caroussel"
 
 const infos = new settings()
 const percentage = 60
@@ -23,14 +24,16 @@ function Store(){
 
 	return<div>
 		<Page title="Store | hardware, software">
-			<Container maxWidth="lg">
-				
-				<Typography variant="h2">Store app</Typography>	
-				<br/>
-				<Articles posts={posts} />
-				<br />
-				{/**<CircularProgressbar value={percentage} text={`${percentage}%`} />**/}
-			</Container>
+			<div>
+				<HomeCaroussel />
+				<Container maxWidth="lg">
+					<Typography variant="h3">Les articles les plus recents</Typography>	
+					<br/>
+					<Articles posts={posts} />
+					<br />
+					{/**<CircularProgressbar value={percentage} text={`${percentage}%`} />**/}
+				</Container>
+			</div>
 		</Page>
 	</div>
 }

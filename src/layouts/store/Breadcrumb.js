@@ -9,7 +9,7 @@ export default function Breadcrumb({currentpath, text, post}){
 			<Stack>
 				<Breadcrumbs>
 					<Chip label={<><Link underline={"none"} to={"/store"} component={RouterLink} >Store</Link></>} />
-					<Chip label={<Link underline={"none"}>{post.title}</Link>} />
+					<Link underline={"none"}>{post.title}</Link>
 				</Breadcrumbs>
 			</Stack>
 		</div>

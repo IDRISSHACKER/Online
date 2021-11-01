@@ -11,6 +11,9 @@ export default function Browser(){
 			<Link component={RouterLink} underline="none" to="create-category">
 				<Button>Creer une categorie</Button>
 			</Link>
+			<Link component={RouterLink} underline="none" to="build-slide">
+				<Button>Gestionnaire de caroussel</Button>
+			</Link>
 		</Card>
 	</>
 }

@@ -15,6 +15,8 @@ import settings from "src/_mocks_/settings"
      };
  }
 
+
+
  export const addPost = (data)=>{
     return (dispatch)=>{
         const api = axios.create({

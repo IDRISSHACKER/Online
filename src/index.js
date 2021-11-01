@@ -19,6 +19,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { getCtg } from './action/category.action';
 import { getUser } from './action/user.action';
+import { getSlide } from './action/slider.action';
 
 const store = createStore(
   rootReducer,
@@ -30,6 +31,9 @@ store.dispatch(
   )
 store.dispatch(
   getCtg()
+)
+store.dispatch(
+  getSlide()
 )
 
 if(localStorage.getItem("id")){

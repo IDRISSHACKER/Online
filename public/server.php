@@ -27,6 +27,7 @@ use App\table\Article;
 use App\table\Avis;
 use App\table\Categorie;
 use App\table\Image;
+use App\table\Slider;
 
 #settings
 
@@ -120,4 +121,12 @@ if($page === "home/" OR $page === "home"){
 
 	Avis::updateAvi();
 
+}else if($page === "setSlide/" OR $page === "setSlide"){
+
+	Slider::setSlide();
+
+}else if($page === "sliders/" OR $page === "sliders"){
+
+	Slider::getSlide();
+	
 }

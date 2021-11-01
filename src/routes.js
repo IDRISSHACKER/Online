@@ -12,9 +12,11 @@ import AdminNavbarLayout from './layouts/admin/AdminNavbarLayout';
 import Post from './pages/Post';
 import NotFound from './pages/Page404';
 import CreateCategory from './pages/admin/createCategory';
+
 // axios
 import axios from 'axios';
 import "./css/master.css";
+import CreateSlide from './pages/admin/crateSlide';
 
 // ----------------------------------------------------------------------
 
@@ -77,6 +79,10 @@ export default function Router() {
         {
           path: "/create-category",
           element: <CreateCategory />
+        },
+        {
+          path: "/build-slide",
+          element: <CreateSlide />
         }
       ]
     },

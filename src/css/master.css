@@ -10,6 +10,11 @@ body{
 .apercu{
 	height: 200px;
 }
+
+.apercu-caroussel{
+	height: 400px;
+}
+
 .title, .title *{
 	font-size: 1rem !important;
 	margin: 0 !important;
