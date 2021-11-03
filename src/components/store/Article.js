@@ -26,18 +26,18 @@ export default function Article({post, parent}){
 		formData.append("ctg_id",post.ctgId)
 		await dispatch(getPosts())
 		await dispatch(getPostsByCtg(formData))
-		//dispatch(getAvis(post.id))
+		await dispatch(getAvis(post.id))
 
 		if(parent === "post"){
 			
-			e.preventDefault()
-			window.location = location
+			//e.preventDefault()
+			//window.location = location
 
 		}
 
 	}
 
-	const [avis, setAvis] = useState(useSelector(state=>state.aviReducer))
+	const [avis, setAvis] = useState(post.notes)
 	const notation = 3
 	const step = 0.5
 	//const props = useSpring({opacity:1,from:{opacity: 0}})
@@ -45,7 +45,7 @@ export default function Article({post, parent}){
 
 	return(
 		<Link underline="none" variant="subtitle2" onClick={handleClick} component={RouterLink} to={location}>
-			<Card className="post">
+			<Card className="post post-annim">
 				<CardMedia
 					title = {post.title}
 					image = {`${infos.init().APP_FOLDER}/img/posts/${post.img}`}
@@ -66,13 +66,19 @@ export default function Article({post, parent}){
 						{fFcfa(`${post.price}`)}
 					</Typography>
 					<Typography variant="h5" className="price">
-						
-							<Rating name="half-rating" defaultValue={3} precision={step} readOnly/>
+						{avis === null || avis === 0 ?
+							<span></span>
+							:<Rating name="half-rating" defaultValue={3} value={avis == null ? 0 : parseFloat( avis)} precision={step} readOnly/>
+					}
 
 					</Typography>
 
 					<Typography variant="body2" className="stock">
-						il ne reste plus que {post.qtt} en stock
+						{parseInt(post.qtt) <= 5 ?
+							<span>il ne reste plus que {post.qtt} en stock</span> 
+							:
+							<span></span>
+						}
 					</Typography>
 
 				</CardContent>

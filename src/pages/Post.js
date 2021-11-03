@@ -105,7 +105,7 @@ function Post() {
 							</Grid>
 							<Grid item md={4} xs={12} sm={4}>
                 				<Typography>
-									<Rating value={round(evaluate(avis),3)} defaultValue={0} size="small" readOnly/>
+									<Rating value={evaluate(avis)} defaultValue={0} size="small" readOnly/>
 									<span>{sizeDatas(avis) == 0 ? 0 : round(evaluate(avis),2)} sur 5</span>
 								</Typography>
 								<Typography variant="h6">Evaluer ce produit</Typography>

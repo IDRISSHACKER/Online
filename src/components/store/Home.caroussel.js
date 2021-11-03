@@ -9,6 +9,7 @@ import axios from 'axios'
 import settings from "src/_mocks_/settings"
 import { Typography } from "@material-ui/core"
 import SlideCaroussel from "./Slide.caroussel"
+import { margin } from "@material-ui/system"
 
 const infos = new settings()
 
@@ -17,11 +18,14 @@ export default function HomeCaroussel(){
 
 
 	let sliders = useSelector(state => state.slideReducer)
+    let carousel
+    //carousel.goTo(Number(target.value))
+    const speed = 10000
 
     return <>
-        <Typography variant="h5" containt="h2">De la même categorie</Typography>
 		<hr />
-        <Caroussel breakPoints={breakPoints} >
+        <Caroussel style={customStyle} enableAutoPlay autoPlaySpeed={speed} breakPoints={breakPoints} onChange={(currentItem, pageIndex) => pageIndex === sliders.length - 1 ? setTimeout(()=>carousel.goTo(0), (speed*2)-(speed/2)) : console.log(pageIndex) } ref={ref => (carousel = ref)}>
+
             {!isEmpty(sliders) && sliders.map((slide, index)=>(
                 <ItemCaroussel key={index} article={<SlideCaroussel slide={slide} parent={"post"} />}/>
             ))}
@@ -35,3 +39,9 @@ const breakPoints = [
     {width:768, itemsToShow:1},
     {width:1200, itemsToShow:1},
 ]
+
+const customStyle = {
+    width: "100%",
+    padding: "0px",
+    margin: "0px",
+}

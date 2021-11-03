@@ -20,6 +20,7 @@ import thunk from 'redux-thunk';
 import { getCtg } from './action/category.action';
 import { getUser } from './action/user.action';
 import { getSlide } from './action/slider.action';
+import { mostAvisPost } from './action/mostAvisPosts.action';
 
 const store = createStore(
   rootReducer,
@@ -35,6 +36,10 @@ store.dispatch(
 store.dispatch(
   getSlide()
 )
+store.dispatch(
+  mostAvisPost()
+)
+
 
 if(localStorage.getItem("id")){
   store.dispatch(

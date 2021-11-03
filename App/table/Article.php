@@ -14,7 +14,18 @@ class Article extends Table
 
     public static function get_articles()
     {
-        return self::query("SELECT articles.id, articles.title, articles.slug, articles.img, articles.qtt, articles.price, articles.description, category.category_name, category.id as ctgId, articles.created_at FROM category INNER JOIN articles ON category.id = articles.category_id ORDER BY id DESC");
+        return self::query("SELECT 
+        articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, articles.category_id AS ctgId, 
+        category.category_name, articles.created_at, avis.note, 
+        AVG(avis.note) AS notes,
+        COUNT(avis.note) as navis
+        FROM avis 
+        RIGHT JOIN articles 
+        ON articles.id = avis.post_id 
+        INNER JOIN category 
+        ON category.id = articles.category_id 
+        GROUP BY avis.post_id
+        ORDER BY articles.id DESC");
     }
 
     public static function get_article()
@@ -43,10 +54,41 @@ class Article extends Table
 
         if (isset($ctg_id) and !empty($ctg_id)) {
 
-            return self::query("SELECT articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, category.category_name FROM articles INNER JOIN category ON category.id = articles.category_id WHERE category.id = $ctg_id AND articles.id != $id");
+           // return self::query("SELECT articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, category.category_name FROM articles INNER JOIN category ON category.id = articles.category_id WHERE category.id = $ctg_id AND articles.id != $id");
+
+            return self::query("SELECT 
+            articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, articles.category_id AS ctgId, 
+            category.category_name, articles.created_at, avis.note, 
+            AVG(avis.note) AS notes,
+            COUNT(avis.note) as navis
+            FROM avis 
+            RIGHT JOIN articles 
+            ON articles.id = avis.post_id 
+            INNER JOIN category 
+            ON category.id = articles.category_id 
+            WHERE category.id = $ctg_id AND articles.id != $id
+            GROUP BY avis.post_id
+            ORDER BY articles.id DESC
+            ");
         } else {
             return [];
         }
+    }
+
+    public static function getArticleLikeNote(){
+        echo json_encode(self::query("SELECT 
+        articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, articles.category_id AS ctgId, 
+        category.category_name, articles.created_at, avis.note, 
+        AVG(avis.note) AS notes,
+        COUNT(avis.note) as navis 
+        FROM avis 
+        INNER JOIN articles 
+        ON articles.id = avis.post_id 
+        INNER JOIN category 
+        ON category.id = articles.category_id 
+        GROUP BY avis.post_id 
+        ORDER BY notes DESC
+        "));
     }
 
     public static function setArticle(){

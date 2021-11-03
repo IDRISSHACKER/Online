@@ -39,7 +39,7 @@ class Avis extends Table
     public static function getAvis(){
 
         $post_id = $_POST["post_id"];
-        $avis = self::query("SELECT users.id as userId, users.email, users.surname, avis.id, avis.note, avis.title, avis.comment FROM avis LEFT JOIN users ON users.id = avis.user_id  WHERE avis.post_id = $post_id ORDER BY avis.id DESC");
+        $avis = self::query("SELECT users.id as userId, users.email, users.surname, avis.id, avis.note, avis.title, avis.comment FROM avis INNER JOIN users ON users.id = avis.user_id  WHERE avis.post_id = $post_id ORDER BY avis.id DESC");
         
         echo json_encode($avis);
     }

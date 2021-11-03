@@ -1,6 +1,6 @@
 import { Spring, useSpring, animated } from "react-spring"
 import {Link as RouterLink} from "react-router-dom"
-import {Card, CardContent, CardMedia, Link, Rating, Typography} from '@material-ui/core'
+import {Card, CardContent, CardMedia, Link, Rating, Typography, Button} from '@material-ui/core'
 import settings from "../../_mocks_/settings"
 import {formatTitle} from "../../utils/formatText"
 import {evaluate, fFcfa} from "../../utils/formatNumber"
@@ -22,10 +22,16 @@ export default function SlideCaroussel({slide}){
                         className = "apercu-caroussel"
                         alt = {slide.img}
                     />
-                    <CardContent>
-                        <Typography gutterBottom variant="h6" component="h2">
-                            {formatTitle(slide.stitle,80)}
-                        </Typography>
+                    <CardContent className="custom-content" style={customStyle} >
+                        <div>
+                            <Typography className="custom-content-title" gutterBottom variant="h3" component="h2">
+                                {formatTitle(slide.stitle,80)}
+                            </Typography>
+                            <Typography className="custom-content-subtitle" gutterBottom variant="body2" component="h2">
+                                {formatTitle(slide.description,100)}
+                            </Typography>
+                            <Button className="custom-content-button" component={RouterLink} to={location}>Voir les details</Button>
+                        </div>
 
                     </CardContent>
                 </Card>
@@ -37,5 +43,4 @@ export default function SlideCaroussel({slide}){
 const customStyle = {
     width:"100%",
     height:"100%",
-    margin:"10px",
 }

@@ -5,6 +5,7 @@ import aviReducer from "./avis.reducer";
 import userReducer from "./user.reducer";
 import likeCtgReducer from "./likeCtg.reducer";
 import slideReducer from "./slide.reducer";
+import mostAvisPostsReducer from "./mostAvisPosts.reducer";
 
 export default combineReducers({
     postsReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     aviReducer,
     userReducer,
     likeCtgReducer,
-    slideReducer
+    slideReducer,
+    mostAvisPostsReducer
 })

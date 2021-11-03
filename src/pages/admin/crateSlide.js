@@ -9,7 +9,7 @@ import { addPost, getPosts } from "src/action/posts.action"
 import  Upload  from "src/utils/Upload"
 import CategoryList from "src/components/admin/categoryList"
 import { getCtg, setCtg } from "src/action/category.action"
-import { addSlide } from "src/action/slider.action"
+import { addSlide, getSlide } from "src/action/slider.action"
 
 const infos = new settings()
 
@@ -42,6 +42,7 @@ function createSlide(){
 			datas.append("post_id", post_id)
 
 			dispatch(addSlide(datas))
+			dispatch(getSlide())
 
 			console.log("Slide creer")
 

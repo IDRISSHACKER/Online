@@ -129,4 +129,8 @@ if($page === "home/" OR $page === "home"){
 
 	Slider::getSlide();
 	
+}else if($page === "mostNote/" OR $page === "mostNote"){
+
+	Article::getArticleLikeNote();
+
 }

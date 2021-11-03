@@ -36,7 +36,7 @@ class Slider extends Table
         INNER JOIN articles 
         ON  slider.post_id = articles.id 
         ORDER BY id DESC 
-        LIMIT 10");
+        LIMIT 5");
 
        echo json_encode($sliders);
     }

@@ -1,5 +1,6 @@
 import React from "react"
-import { Container, Typography} from '@material-ui/core'
+import { Link as RouterLink } from "react-router-dom"
+import { Container, Typography, Stack, Link} from '@material-ui/core'
 import settings from "../_mocks_/settings"
 import axios from "axios"
 import Articles from "./../components/store/Articles"
@@ -21,15 +22,24 @@ function Store(){
 	//dispatch(getPosts())
 
 	const posts = useSelector(state => state.postsReducer)
+	const postsMost = useSelector(state => state.mostAvisPostsReducer)
 
 	return<div>
 		<Page title="Store | hardware, software">
 			<div>
 				<HomeCaroussel />
 				<Container maxWidth="lg">
-					<Typography variant="h3">Les articles les plus recents</Typography>	
-					<br/>
+					<Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
+					 <Typography variant="h3">Les articles les plus recents</Typography>
+					 <Link underline="none" to="/" component={RouterLink} >Tout aficher</Link>	
+					</Stack>
 					<Articles posts={posts} />
+					<br />
+					<Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
+						<Typography variant="h3">Les articles les plus populaire</Typography>
+						<Link underline="none" to="/" component={RouterLink} >Tout aficher</Link>	
+					</Stack>
+					<Articles posts={postsMost} />
 					<br />
 					{/**<CircularProgressbar value={percentage} text={`${percentage}%`} />**/}
 				</Container>

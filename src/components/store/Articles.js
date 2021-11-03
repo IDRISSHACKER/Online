@@ -3,17 +3,37 @@ import { Card, Button, TextField, CardHeader, Grid} from '@material-ui/core'
 import axios from "axios"
 import Article from "./Article"
 import { isEmpty } from "src/utils/isEmpty"
+import Caroussel from 'react-elastic-carousel'
+import ItemCaroussel from "./Item.caroussel"
 
 
 export default function Articles({posts, parenturl}){
 		return<div>
-			<Grid container spacing={3}>
+			
+			<Caroussel breakPoints={breakPoints} >
 				{!isEmpty(posts) && typeof posts === 'object' && posts.map((post,index)=>(
-						<Grid key={index} item md={3} xs={12} sm={6}>
-							<Article post={post} parent={parenturl} />
-						</Grid>
+						<ItemCaroussel key={index} article={<Article post={post} parent={parenturl} />}/>
 					))
 				}
-			</Grid>
+			</Caroussel>
 		</div>
 }
+
+const breakPoints = [
+    {
+		width:1, 
+		itemsToShow:1
+	},
+    {
+		width:550, 
+		itemsToShow:2
+	},
+    {
+		width:768, 
+		itemsToShow:3
+	},
+    {
+		width:1200, 
+		itemsToShow:4
+	},
+]

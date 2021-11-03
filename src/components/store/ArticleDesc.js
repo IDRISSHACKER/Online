@@ -30,7 +30,7 @@ export default function ArticleDesc({Desc, avisp}){
 			<Typography variant="h5" contain="h3">
 				<span>note globale: </span>
 				<span>
-					<Rating defaultValue={0} value={round(evaluate(avisp))} size="large" precision={0.5}  readOnly/>
+					<Rating defaultValue={0} value={evaluate(avisp)} size="large" precision={0.5}  readOnly/>
 				</span>
 				<span> {sizeDatas(avisp)} evaluation</span>
 			</Typography>
