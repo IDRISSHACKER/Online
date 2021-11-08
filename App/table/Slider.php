@@ -20,9 +20,7 @@ class Slider extends Table
         [$post_id, $image, $title, $description]
        )){
 
-        $last_slider = self::query("SELECT * FROM slider ORDER BY id DESC LIMIT 1")[0];
-
-        echo json_encode($last_slider);
+        self::getSlide();
 
        }
 
@@ -39,6 +37,25 @@ class Slider extends Table
         LIMIT 5");
 
        echo json_encode($sliders);
+    }
+
+    public static function removeSlide(){
+        $id = $_POST['id'];
+
+        self::del("DELETE FROM `slider` WHERE `slider`.`id` = ?", [$id]);
+    
+        self::getSlide();
+    }
+
+    public static function updateSlide(){
+        $title       = $_POST['title'];
+        $description = $_POST['description'];
+        $id          = $_POST['id'];
+        $pId         = $_POST['pId'];
+
+        self::save("UPDATE `slider` SET `slider`.`post_id` = ?, `slider`.`title` = ?, `slider`.`description` = ? WHERE `slider`.`id` = '$id'",[$pId, $title, $description]);
+
+        self::getSlide();
     }
     
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {Card, CardContent, CardHeader, Rating, Typography, Avatar, IconButton} from "@material-ui/core"
 import ModeEditTwoToneIcon from '@mui/icons-material/ModeEditTwoTone';
@@ -13,6 +13,11 @@ export default function Avi({avi, post}){
     
     const [open, setOpen] =  useState(false)
     const [openPlainte, setOpenPlainte] = useState(false)
+    const [rat, setRat] = useState(parseFloat(avi.note))
+
+    useEffect(()=>{
+        setRat(parseFloat(avi.note))
+    })
 
     const setOpened =  function(value = true){
 		setOpen(value)
@@ -49,7 +54,7 @@ export default function Avi({avi, post}){
                 <CardHeader 
                 avatar={<Avatar>{avi.surname[0]}</Avatar> }
                 title={avi.email} 
-                subheader={<Typography variant={"body1"}><Rating defaultValue={parseFloat(avi.note)} precision={0.5} readOnly   />{avi.title}</Typography>}
+                subheader={<Typography variant={"body1"}><Rating value={rat} precision={0.5} readOnly   />{avi.title}</Typography>}
                 action={id === parseInt(avi.userId) ?
                     <IconButton onClick={handlerEdit} title="Editer votre commentaire">
                         <ModeEditTwoToneIcon color="primary" />

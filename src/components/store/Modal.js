@@ -42,7 +42,6 @@ export default function Modal({opened, post}) {
     if(note && motif && avi){
 
       if(dispatch(setAvis(data))){
-        console.log("success")
 
         setNote("")
         setAvi("")
@@ -61,17 +60,12 @@ export default function Modal({opened, post}) {
 
 
     console.log("Avis prise en compte ")
-    dispatch(getAvis(post.id))
-    dispatch(getAvis(post.id))
-    dispatch(getAvis(post.id))
-    dispatch(getAvis(post.id))
-    dispatch(getAvis(post.id))
-    dispatch(getAvis(post.id))
     
   }
 
   const handlerRating = (ev, newRat)=>{
     setNote(`${newRat}`)
+    console.log(newRat)
 
     //const connected = localStorage.getItem('connected') ? parseInt(localStorage.getItem('connected')) : 0
     

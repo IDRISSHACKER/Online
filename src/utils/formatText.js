@@ -16,7 +16,16 @@ export function formatDescription(description="", qtt=384){
 
 export function getIdInUrl(uri=window.location.href){
 	const url = uri.split("/")
-	const id = parseInt(url[url.length-1])
+	let id = url[url.length-1]
+
+	id = id.match(/[0-9]/gi) != null ? parseInt(id) : id
 
 	return id
+	
+}
+
+export function replaceSpace(text){
+	
+		return text.replaceAll(" ", "-")
+
 }

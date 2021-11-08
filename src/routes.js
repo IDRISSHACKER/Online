@@ -5,7 +5,7 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Store from './pages/Store';
-import Admin from './pages/admin/Admin';
+import DashboardApp from './pages/admin/DashboardApp';
 import UploadArticle from "./pages/admin/UploadArticle.js"
 import NavbarLayout from './layouts/store/navbar';
 import AdminNavbarLayout from './layouts/admin/AdminNavbarLayout';
@@ -14,9 +14,11 @@ import NotFound from './pages/Page404';
 import CreateCategory from './pages/admin/createCategory';
 
 // axios
-import axios from 'axios';
 import "./css/master.css";
 import CreateSlide from './pages/admin/crateSlide';
+import DashboardLayout from './layouts/dashboard';
+import PostList from './pages/admin/PostList';
+import EditArticle from './pages/admin/EditArticle';
 
 // ----------------------------------------------------------------------
 
@@ -67,14 +69,26 @@ export default function Router() {
     },
     {
       path: 'admin',
-      element: status && admin_online ? <AdminNavbarLayout /> : <Navigate to="/store" />,
+      element: status && admin_online ? <DashboardLayout /> : <Navigate to="/store" />,
       children: [
         { path: "/",
-          element: <Admin />
+          element: <Navigate to="/admin/dashboard" />
         },
         {
-          path: "/upload",
+          path: "/dashboard",
+          element: <DashboardApp />
+        },
+        {
+          path: "/post-list/upload",
           element: <UploadArticle />
+        },
+        {
+          path: "/post-list/edit/:id",
+          element: <EditArticle />
+        },
+        {
+          path: "/post-list",
+          element: <PostList />
         },
         {
           path: "/create-category",

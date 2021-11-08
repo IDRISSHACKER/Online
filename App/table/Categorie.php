@@ -24,7 +24,7 @@ class Categorie extends Table
 
     if(self::save("INSERT INTO category(category_name, category_desc, category_img) VALUES(?,?,?)", [$ctg_title, $ctg_desc, $ctg_img])){
 
-      echo json_encode(["success"]);
+      echo json_encode(self::getCategories());
 
     }else{
 
@@ -34,5 +34,26 @@ class Categorie extends Table
 
 
    }
+
+   public static function editCategory(){
+    $ctg_id     = $_POST['id'];
+    $ctg_title  = $_POST['title'];
+    $ctg_desc   = $_POST['description'];
+
+    self::save("UPDATE `category` SET `category`.`category_name` = ?, `category`.`category_desc` = ? WHERE `category`.`id` = $ctg_id",[$ctg_title, $ctg_desc]);
+
+    echo json_encode(self::getCategories());
+
+   }
+
+  public static function removeCtg(){
+
+    $id = $_POST['id'];
+
+    self::del("DELETE FROM `category` WHERE `category`.`id` = ?", [$id]);
+
+    echo json_encode(self::getCategories());
+
+  }
 
 }

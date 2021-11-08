@@ -81,7 +81,9 @@ export default function AccountPopover() {
           })
         }}
       >
-        <Avatar>{!isEmpty(account) && account[0].surname[0].toLocaleUpperCase()}</Avatar>
+       {!isEmpty(account) && typeof account == "object" &&
+        <Avatar> {account[0].surname[0].toLocaleUpperCase()} </Avatar>
+      }
       </IconButton>
 
       <MenuPopover

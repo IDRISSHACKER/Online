@@ -82,4 +82,9 @@ class Table
     public static function save($statement, $attributes = null){
         return App::bdd()->saving($statement, $attributes);
     }
+
+	public static function del($statement, $attributes = null){
+
+		return App::bdd()->saving($statement, $attributes);
+	}
 }

@@ -61,10 +61,14 @@ export default function Article({post, parent}){
 						<span>{post.category_name}</span>
 					</Link>
 					</Typography>*/}
-
-					<Typography variant="h5" className="price">
-						{fFcfa(`${post.price}`)}
-					</Typography>
+					
+					{parseInt(post.showPrice) ?
+						<Typography variant="h5" className="price">
+							{fFcfa(`${post.price}`)}
+						</Typography>
+						:
+						<span></span>
+					}
 					<Typography variant="h5" className="price">
 						{avis === null || avis === 0 ?
 							<span></span>
@@ -72,14 +76,17 @@ export default function Article({post, parent}){
 					}
 
 					</Typography>
-
-					<Typography variant="body2" className="stock">
-						{parseInt(post.qtt) <= 5 ?
-							<span>il ne reste plus que {post.qtt} en stock</span> 
-							:
-							<span></span>
-						}
-					</Typography>
+					{!parseInt(post.isSoftware) ?
+						<Typography variant="body2" className="stock">
+							{parseInt(post.qtt) <= 5 ?
+								<span>il ne reste plus que {post.qtt} en stock</span> 
+								:
+								<span></span>
+							}
+						</Typography>
+						:
+						<span></span>
+					}
 
 				</CardContent>
 			</Card>

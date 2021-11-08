@@ -19,6 +19,7 @@ import { evaluate, sizeDatas } from "src/utils/formatNumber"
 import Modal from "../components/store/Modal"
 import { MessageOutlined } from "@mui/icons-material"
 import LikeCtgCaroussel from "src/components/store/likeCtg.caroussel"
+import { useNavigate } from "react-router-dom"
 //import "../css/master.scss"
 
 const infos = new settings()
@@ -29,10 +30,14 @@ function Post() {
 
 	const [load, setLoad] = useState("1")
 	const [open, setOpen] = useState(false)
+	const navigate        = useNavigate()  
 
 	const posts = useSelector(state => state.postsReducer)
 
-	const id = getIdInUrl(window.location.href)
+	let id = getIdInUrl(window.location.href)
+
+	typeof id !== 'number' ? navigate("/404") : id = id
+
 
 	const setOpened =  function(value = true){
 		setOpen(value)
@@ -45,7 +50,10 @@ function Post() {
 	}
 
 
-	const post = !isEmpty(posts) && posts.find((elem)=>parseInt(elem.id)===parseInt(id))
+	let post = !isEmpty(posts) && posts.find((elem)=>parseInt(elem.id)===parseInt(id))
+
+	post == undefined ? navigate("/404") : post = post
+	
 
 	let re = setTimeout(function(){
 		if(load == "1"){

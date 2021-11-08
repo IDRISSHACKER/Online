@@ -5,11 +5,11 @@ const initialState = []
 export default function aviReducer(state = initialState, action){
     switch(action.type){
         case SET_AVI:
-            return state
+            return action.payload
         case GET_AVIS:
             return action.payload
         case UPDATE_AVI:
-            return state
+            return action.payload
         case PLAINTE_AVI:
             return state
         default:

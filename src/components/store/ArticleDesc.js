@@ -22,10 +22,14 @@ export default function ArticleDesc({Desc, avisp}){
 		<div>
 			<Typography variant="h4" contain="h2">{Desc.title}</Typography>
 			<hr />
-			<Typography variant="h5" contain="h3">
-				<span>Prix: </span>
-				<span className="price">{fFcfa(Desc.price)}</span>
-			</Typography>
+			{parseInt(Desc.showPrice) ?
+				<Typography variant="h5" contain="h3">
+					<span>Prix: </span>
+					<span className="price">{fFcfa(Desc.price)}</span>
+
+				</Typography>:
+				<span></span>
+			}			
 			<hr />
 			<Typography variant="h5" contain="h3">
 				<span>note globale: </span>
@@ -35,14 +39,22 @@ export default function ArticleDesc({Desc, avisp}){
 				<span> {sizeDatas(avisp)} evaluation</span>
 			</Typography>
 			<hr />
-			<Typography variant="h5" contain="h3">
-				<span>En Stock: </span>
-				<span className="price">{Desc.qtt}</span>
-			</Typography>
+			{!parseInt(Desc.isSoftware) ?
+				<Typography variant="h5" contain="h3">
+					<span>En Stock: </span>
+					<span className="price">{Desc.qtt}</span>
+				</Typography>
+				:
+				<span></span>
+			}
 			<hr />
 			<div>
 				<Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-					<select className="custom-select">{options}</select> 
+					{!parseInt(Desc.isSoftware) ?
+						<select className="custom-select">{options}</select> 
+						:
+						<span></span>
+					}
 					<Button
 						fullWidth
 		                size="large"

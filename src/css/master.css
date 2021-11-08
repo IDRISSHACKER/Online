@@ -1,10 +1,9 @@
-
-
 body{
 	-webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     text-size-adjust: 100%;
 }
+
 
 /*Card redisign*/
 .apercu{
@@ -185,3 +184,55 @@ hr{
 	border-radius: 0px !important;
 }
 
+._FCdzt{
+
+	margin-top: 0px !important;
+}
+
+.imgTable{
+
+	width: 100px !important;
+	height: auto !important;
+	border: solid 3px rgba(0, 0, 0, .08);
+	vertical-align: middle;
+	border-radius: 4px;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.customAlert{
+
+	z-index: 9999;
+	position: fixed !important;
+	left: 300px !important;
+}
+
+.customUp{
+
+	z-index: -80 !important;
+
+}
+
+.customUp *{
+
+	z-index: -80 !important;
+}
+
+._2B-m5{
+	z-index: -60 !important;
+}
+
+._GQrmn{
+	z-index: -60 !important;
+}
+
+
+.create-book-photo-input{
+	z-index:  70 !important;
+} 
+
+.custom-img-edit{
+
+	height: 300px !important;
+	width: auto;
+}

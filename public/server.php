@@ -1,24 +1,15 @@
 <?php
-#autorise external request
+session_start();
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Max-Age: 86400');  
 header("Access-Control-Allow-Methods: *");
 
-#start the session for users
-session_start();
-
-$_SESSION["p"] = "idriss";
-
-#real path
 define("ROOT", dirname(__DIR__));
-
-#autoloader to autolaod class
 require ROOT.'/'.'App/autoload.php';
 autoload::register();
 
-#define the differents class to use
 use App\Database;
 use App\Config;
 use App\table\Users;
@@ -28,10 +19,8 @@ use App\table\Avis;
 use App\table\Categorie;
 use App\table\Image;
 use App\table\Slider;
+use App\table\Commande;
 
-#settings
-
-#start routing
 $page = "";
 
 if (!empty($_GET["page"])) {
@@ -52,14 +41,13 @@ if($page === "home/" OR $page === "home"){
 
 	//
 
-}else if($page === "users/" OR $page === "users"){
-	$users = Users::getUsers();
-	echo json_encode($users);
-
 }else if($page === "user/" OR $page === "user"){
-
-	$user = Users::getUserInfos();
+	$user = Users::getUser();
 	echo json_encode($user);
+
+}else if($page === "users/" OR $page === "users"){
+
+	Users::getUsers();
 
 }else if($page === "setUser/" OR $page === "setUser"){
 
@@ -109,6 +97,10 @@ if($page === "home/" OR $page === "home"){
 
 	Categorie::setCategory();
 
+}else if($page === "removeCtg/" OR $page === "removeCtg"){
+
+	Categorie::removeCtg();
+
 }else if($page === "setAvi/" OR $page === "setAvi"){
 
 	Avis::setAvi();
@@ -133,4 +125,27 @@ if($page === "home/" OR $page === "home"){
 
 	Article::getArticleLikeNote();
 
+}else if($page === "updateCategory/" OR $page === "updateCategory"){
+
+	Categorie::editCategory();
+
+}else if($page === "removeSlide/" OR $page === "removeSlide"){
+
+	Slider::removeSlide();
+
+}else if($page === "updateSlide/" OR $page === "updateSlide"){
+
+	Slider::updateSlide();
+
+}else if($page === "removeArticle/" OR $page === "removeArticle"){
+
+	Article::removeArticle();
+
+}else if($page === "updateArticle/" OR $page === "updateArticle"){
+
+	Article::updateArticle();
+
+}else if($page === "getCommandes/" OR $page === "getCommande"){
+
+	Commande::getCommandes();
 }

@@ -18,9 +18,10 @@ import { getPosts } from './action/posts.action';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { getCtg } from './action/category.action';
-import { getUser } from './action/user.action';
+import { getUser, getUsers } from './action/user.action';
 import { getSlide } from './action/slider.action';
 import { mostAvisPost } from './action/mostAvisPosts.action';
+import { getCommandes } from './action/Commande.action';
 
 const store = createStore(
   rootReducer,
@@ -39,13 +40,18 @@ store.dispatch(
 store.dispatch(
   mostAvisPost()
 )
-
+store.dispatch(
+  getUsers()
+)
 
 if(localStorage.getItem("id")){
   store.dispatch(
     getUser()
   )
 }
+store.dispatch(
+  getCommandes()
+)
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
@@ -65,4 +71,4 @@ serviceWorker.unregister();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(console.log);

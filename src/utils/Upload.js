@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import 'image-upload-react/dist/index.css'
 import axios from 'axios'
 import settings from 'src/_mocks_/settings';
+
  
 function Upload({remote}) {
   const [imageSrc, setImageSrc] = useState();
@@ -31,15 +32,16 @@ function Upload({remote}) {
  
   return (
     <>
-    <Typography variant="h7">Choisir l'apercu</Typography>
     <ImageUpload
       handleImageSelect={handleImageSelect}
       imageSrc={imageSrc}
       setImageSrc={setImageSrc}
+      className="customUp"
       style={{
-        width: 500,
-        height: 350,
-        background: 'gold'
+        width: "100%",
+        height: 300,
+        background: "gold",
+        borderRadius: "10px"
       }}
     />
     </>

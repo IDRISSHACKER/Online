@@ -32,8 +32,6 @@ export default function ModalEditAvi({opened, post, oldAvi}) {
 
 
   const handleSend = ()=>{
-      
-    console.log("id",oldAvi.id)
 
     const data = new FormData
     data.append("id", localStorage.getItem('id') ? localStorage.getItem('id') : 1)
