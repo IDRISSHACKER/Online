@@ -30,6 +30,7 @@ class Commande extends Table
                 articles.isSoftware,
                 category.category_name,
                 commande.user_solved,
+                commande.reverse,
                 commande.admin_solved,
                 commande.qtt as commandeQtt
                 FROM commande

@@ -110,10 +110,9 @@ class Users extends Table{
     }
 
     public static function removeUser(){
-        if ($_SESSION["id"]) {
-            $id = $_POST["id"];
-            self::query("UPDATE users set deleted = ? WHERE id = $id",[1]);
-        }
+        $id = $_POST["id"];
+        self::del("DELETE FROM users WHERE id = $id");
+        self::getUsers();
     }
 
 }

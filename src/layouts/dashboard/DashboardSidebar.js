@@ -12,6 +12,8 @@ import { MHidden } from '../../components/@material-extend';
 //
 import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
+import { useSelector } from 'react-redux';
+import { isEmpty } from 'src/utils/isEmpty';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +43,7 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const user = useSelector(state=>state.userReducer)
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -68,10 +71,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {!isEmpty(user) && user[0].surname}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {!isEmpty(user) && user[0].role}
               </Typography>
             </Box>
           </AccountStyle>
@@ -102,7 +105,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
           <Box sx={{ textAlign: 'center' }}>
             <Typography gutterBottom variant="h6">
-              Point de vente
+              Retour
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               Apercu de la boutique
@@ -112,7 +115,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           <Button
             fullWidth
             component={RouterLink}
-            to="/home"
+            to="/store"
             variant="contained"
           >
             Retourner

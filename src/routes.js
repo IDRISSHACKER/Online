@@ -7,6 +7,8 @@ import Register from './pages/Register';
 import Store from './pages/Store';
 import DashboardApp from './pages/admin/DashboardApp';
 import UploadArticle from "./pages/admin/UploadArticle.js"
+import Users from './pages/admin/Users'
+
 import NavbarLayout from './layouts/store/navbar';
 import AdminNavbarLayout from './layouts/admin/AdminNavbarLayout';
 import Post from './pages/Post';
@@ -97,6 +99,10 @@ export default function Router() {
         {
           path: "/build-slide",
           element: <CreateSlide />
+        },
+        {
+          path: "/users",
+          element: <Users />
         }
       ]
     },

@@ -5,8 +5,11 @@ import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 import { isEmpty } from 'src/utils/isEmpty';
+import { motion } from 'framer-motion';
+import { MotionContainer, varBounceInLeft } from 'src/components/animate';
+
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -39,14 +42,18 @@ export default function AppNewUsers() {
   const users = useSelector(state => state.usersReducer)
 
   return (
-    <RootStyle>
-      <IconWrapperStyle>
-        <Icon icon={usergroupAddOutlined} width={34} height={34} />
-      </IconWrapperStyle>
-      <Typography variant="h3">{!isEmpty(users) && fShortenNumber(users.length)}</Typography>
-      <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Nombre d'utilisateur
-      </Typography>
-    </RootStyle>
+    <MotionContainer initial="initial" open>
+      <motion.div variants={varBounceInLeft}>
+        <RootStyle>
+          <IconWrapperStyle>
+            <Icon icon={usergroupAddOutlined} width={34} height={34} />
+          </IconWrapperStyle>
+          <Typography variant="h3">{!isEmpty(users) && fShortenNumber(users.length)}</Typography>
+          <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+            Utilisateurs
+          </Typography>
+        </RootStyle>
+      </motion.div>
+    </MotionContainer>
   );
 }

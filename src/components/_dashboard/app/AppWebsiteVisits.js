@@ -4,63 +4,79 @@ import ReactApexChart from 'react-apexcharts';
 import { Card, CardHeader, Box } from '@material-ui/core';
 //
 import { BaseOptionChart } from '../../charts';
+import {isEmpty} from "src/utils/isEmpty"
+import {useSelector} from "react-redux"
+import { fFcfa } from 'src/utils/formatNumber';
+import { useTheme, experimentalStyled as styled } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------------
 
-const data = [];
-const dates = [];
-let lData = [];
-
-if(localStorage.getItem("rStat")){
-
-  lData = JSON.parse(localStorage.getItem("rStat"));
-
-}else{
-
-  lData = [{'post_price':'1500', 'created_at':"15:13"},{'post_price':'1500', 'created_at':"15:13"}];
-
-}
-
-for(let i=lData.length-1; i>=0; i--){
-  data.push(lData[i].total);
-  dates.push(lData[i].jour);
-}
-const CHART_DATA = [
-  {
-    name: 'Vente',
-    type: 'bar',
-    data
-  }
-];
-
-
-
 export default function AppWebsiteVisits() {
-  const chartOptions = merge(BaseOptionChart(), {
-    stroke: { width: [3] },
-    plotOptions: { bar: { columnWidth: '80%', borderRadius: 4, backgroundColor: "tomato" } },
-    fill: { type: ['color'] },
-    labels: dates,
-    xaxis: { type: 'label' },
-    tooltip: {
-      shared: true,
-      intersect: false,
-      y: {
-        formatter: (y) => {
-          if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} FCFA`;
-          }
-          return y;
-        }
-      }
+
+  const theme = useTheme();
+
+  const stats = useSelector(state => state.statSaleReducer)
+
+  const data = [
+    { 
+      data: !isEmpty(stats) && stats.map(stat=>parseInt(stat.totalPrice))
     }
+  ]
+
+  const labels = !isEmpty(stats) && stats.map((stat)=>`${stat.created_at}`)
+
+
+  const chartOptions = merge(BaseOptionChart(),{
+    series: [{
+    name: "statistiques",
+    data: stats
+  }],
+    chart: {
+    type: 'area',
+    height: 350,
+    zoom: {
+      enabled: false
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    curve: 'smooth'
+  },
+  title: {
+    text: 'Partitionner par jour',
+    align: 'left'
+  },
+  subTitle: {
+    text: '',
+    align: 'left'
+  },
+  labels: labels,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true
+  },
+  legend: {
+    horizontalAlign: 'left'
+  }
   });
+
+
 
   return (
     <Card>
-      <CardHeader title="Statistique des ventes" subheader="7 Derniers jours" />
+      <CardHeader title="Statistique des ventes" subheader="" />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
-        <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} height={364} />
+      {!isEmpty(stats) && 
+      <ReactApexChart 
+      type="area"
+      series={data} 
+      options={chartOptions} 
+      height={364} /> 
+      }
       </Box>
     </Card>
   );

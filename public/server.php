@@ -20,6 +20,8 @@ use App\table\Categorie;
 use App\table\Image;
 use App\table\Slider;
 use App\table\Commande;
+use App\table\ChartSale;
+
 
 $page = "";
 
@@ -53,6 +55,10 @@ if($page === "home/" OR $page === "home"){
 
 	$user = Users::setUser();
 	echo json_encode($user);
+
+}else if($page === "removeUser/" OR $page === "removeUser"){
+
+	Users::removeUser();
 
 }else if($page === "connexion/" OR $page === "connexion"){
 
@@ -148,4 +154,8 @@ if($page === "home/" OR $page === "home"){
 }else if($page === "getCommandes/" OR $page === "getCommande"){
 
 	Commande::getCommandes();
+
+}else if($page === "statSale/" OR $page === "statSale"){
+
+	ChartSale::chartSaleByDay();
 }

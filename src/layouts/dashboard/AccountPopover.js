@@ -1,8 +1,8 @@
 import { Icon } from '@iconify/react';
 import { useRef, useState } from 'react';
-import homeFill from '@iconify/icons-eva/home-fill';
+import barChart2Outline from '@iconify/icons-eva/bar-chart-2-outline';
 import personFill from '@iconify/icons-eva/person-fill';
-import settings2Fill from '@iconify/icons-eva/settings-2-fill';
+import settings2Filloutline from '@iconify/icons-eva/settings-2-outline';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
 import { alpha } from '@material-ui/core/styles';
@@ -11,23 +11,20 @@ import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '
 import MenuPopover from '../../components/MenuPopover';
 //
 import account from '../../_mocks_/account';
+import { useSelector } from 'react-redux';
+import { isEmpty } from 'src/utils/isEmpty';
 
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
-    icon: homeFill,
-    linkTo: '/'
-  },
-  {
-    label: 'Profile',
-    icon: personFill,
-    linkTo: '#'
+    label: 'Dashboard',
+    icon: barChart2Outline,
+    linkTo: '/admin/dashboard'
   },
   {
     label: 'Settings',
-    icon: settings2Fill,
+    icon: settings2Filloutline,
     linkTo: '#'
   }
 ];
@@ -38,6 +35,7 @@ export default function AccountPopover() {
   const navigate = useNavigate();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const user = useSelector(state=>state.userReducer)
 
   const handleOpen = () => {
     setOpen(true);
@@ -85,10 +83,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {!isEmpty(user) && user[0].surname}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {!isEmpty(user) && user[0].email}
           </Typography>
         </Box>
 

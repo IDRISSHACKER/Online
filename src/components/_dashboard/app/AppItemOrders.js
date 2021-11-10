@@ -4,12 +4,13 @@ import shoppingCartOutline from '@iconify/icons-ant-design/shopping-cart-outline
 import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
 // utils
-import { fShortenNumber } from '../../../utils/formatNumber';
+import { fShortenNumber, sizeNewCommande } from '../../../utils/formatNumber';
 import { ShoppingBagRounded } from '@mui/icons-material';
 import { useReducer, useSelector } from 'react-redux';
 import { usersReducer } from 'src/reducers/user.reducer';
 import { isEmpty } from 'src/utils/isEmpty';
-
+import { motion } from 'framer-motion';
+import { MotionContainer, varBounceInUp } from 'src/components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
@@ -41,14 +42,18 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 export default function AppItemOrders() {
   const commandes = useSelector(state => state.commandeReducer)
   return (
-    <RootStyle>
-      <IconWrapperStyle>
-        <Icon icon={shoppingCartOutline} width={34} height={34} />
-      </IconWrapperStyle>
-      <Typography variant="h3">{!isEmpty(commandes) && fShortenNumber(commandes.length)}</Typography>
-      <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Commandes
-      </Typography>
-    </RootStyle>
+    <MotionContainer initial="initial" open>
+      <motion.div variants={varBounceInUp}>
+        <RootStyle>
+          <IconWrapperStyle>
+            <Icon icon={shoppingCartOutline} width={34} height={34} />
+          </IconWrapperStyle>
+          <Typography variant="h3">{!isEmpty(commandes) && fShortenNumber(sizeNewCommande(commandes))}</Typography>
+          <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+            Commandes
+          </Typography>
+        </RootStyle>
+      </motion.div>
+    </MotionContainer>
   );
 }

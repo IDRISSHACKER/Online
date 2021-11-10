@@ -78,8 +78,8 @@ export default function BaseOptionChart() {
 
     // Chart
     chart: {
-      toolbar: { show: false },
-      zoom: { enabled: false },
+      toolbar: { show: true },
+      zoom: { enabled: true },
       // animations: { enabled: false },
       foreColor: theme.palette.text.disabled,
       fontFamily: theme.typography.fontFamily
@@ -114,7 +114,7 @@ export default function BaseOptionChart() {
     },
 
     // Datalabels
-    dataLabels: { enabled: false },
+    dataLabels: { enabled: true },
 
     // Stroke
     stroke: {
@@ -131,8 +131,8 @@ export default function BaseOptionChart() {
 
     // Xaxis
     xaxis: {
-      axisBorder: { show: false },
-      axisTicks: { show: false }
+      axisBorder: { show: true },
+      axisTicks: { show: true }
     },
 
     // Markers
@@ -144,7 +144,7 @@ export default function BaseOptionChart() {
     // Tooltip
     tooltip: {
       x: {
-        show: false
+        show: true
       }
     },
 

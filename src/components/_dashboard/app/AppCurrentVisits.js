@@ -7,6 +7,9 @@ import { Card, CardHeader } from '@material-ui/core';
 import { fNumber } from '../../../utils/formatNumber';
 //
 import { BaseOptionChart } from '../../charts';
+import { useSelector } from "react-redux"
+import { isEmpty } from 'src/utils/isEmpty';
+
 
 // ----------------------------------------------------------------------
 
@@ -30,50 +33,83 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
-const data = [];
-const dates = [];
-const lData = JSON.parse(localStorage.getItem("rStat"));
-if(lData != null){
-  for(let i=lData.length-1; i>=0; i--){
-    data.push(parseInt(lData[i].post_price));
-    dates.push(lData[i].created_at);
-  }
-}
-const CHART_DATA = [4344, 5435, 1443, 4443];
+
+
 
 export default function AppCurrentVisits() {
   const theme = useTheme();
 
+   const posts = useSelector(state => state.postsReducer)
+   const users = useSelector(state => state.usersReducer)
+   const categories = useSelector(state => state.ctgReducer)
+   const sliders = useSelector(state => state.slideReducer)
+
+   const CHART_DATA = [posts.length, categories.length, sliders.length, users.length]
+   
   const chartOptions = merge(BaseOptionChart(), {
-    colors: [
-      theme.palette.primary.main,
-      theme.palette.info.main,
-      theme.palette.warning.main,
-      theme.palette.error.main
-    ],
-    labels: dates,
-    stroke: { colors: [theme.palette.background.paper] },
-    legend: { floating: true, horizontalAlign: 'center' },
-    dataLabels: { enabled: true, dropShadow: { enabled: false } },
-    tooltip: {
-      fillSeriesColor: false,
-      y: {
-        formatter: (seriesName) => fNumber(seriesName),
-        title: {
-          formatter: (seriesName) => `#${seriesName}`
+    series: CHART_DATA,
+    chart: {
+    height: 390,
+    type: 'radialBar',
+  },
+  plotOptions: {
+    radialBar: {
+      offsetY: 0,
+      startAngle: 0,
+      endAngle: 270,
+      hollow: {
+        margin: 5,
+        size: '30%',
+        background: 'transparent',
+        image: undefined,
+      },
+      dataLabels: {
+        name: {
+          show: false,
+        },
+        value: {
+          show: false,
         }
       }
-    },
-    plotOptions: {
-      pie: { donut: { labels: { show: false } } }
     }
+  },
+  colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+  labels: ['Produits', 'Categories', 'Caroussel', 'utilisateur'],
+  legend: {
+    show: true,
+    floating: true,
+    fontSize: '16px',
+    position: 'left',
+    offsetX: 160,
+    offsetY: 15,
+    labels: {
+      useSeriesColors: true,
+    },
+    markers: {
+      size: 0
+    },
+    formatter: function(seriesName, opts) {
+      return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+    },
+    itemMargin: {
+      vertical: 3
+    }
+  },
+  responsive: [{
+    breakpoint: 480,
+    options: {
+      legend: {
+          show: false
+      }
+    }
+  }]
   });
 
   return (
     <Card>
-      <CardHeader title="Pourcentage des ventes" />
+      <CardHeader title="Generalitées" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="pie" series={data} options={chartOptions} height={280} />
+       {!isEmpty(posts) && users && categories && sliders && <ReactApexChart type="radialBar" series={CHART_DATA} options={chartOptions} height={280} /> }
       </ChartWrapperStyle>
     </Card>
   );

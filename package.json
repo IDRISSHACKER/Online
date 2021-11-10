@@ -75,6 +75,7 @@
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "4.0.0",
     "react-scroll": "^1.8.4",
+    "react-scroll-parallax": "^2.4.0",
     "react-spring": "^9.3.0",
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",

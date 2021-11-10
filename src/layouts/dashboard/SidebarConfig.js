@@ -37,7 +37,7 @@ const sidebarConfig = [
   },
   {
     title: 'utilisateurs',
-    path: '/dashboard/user',
+    path: '/admin/users',
     icon: getIcon(peopleOutline)
   },
 ];

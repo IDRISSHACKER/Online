@@ -1,5 +1,7 @@
+import { interfaceDeclaration } from '@babel/types';
 import { replace } from 'lodash';
 import numeral from 'numeral';
+import { $CombinedState } from 'redux';
 import { isEmpty } from './isEmpty';
 
 // ----------------------------------------------------------------------
@@ -73,4 +75,29 @@ export function evaluate(evaluation){
 
   return (total/count)
 
+}
+
+const verifyCommande = (commande = {})=> commande.admin_solved == "0" || commande.user_solved == "0" && commande.reverse == "0" ? 1 : 0 
+
+
+export const sizeNewCommande = (commandes = [])=>{
+  let newCommandeNumber = 0
+
+  for(let counter in commandes){
+
+    !isEmpty(commandes) && verifyCommande(commandes[counter]) ? newCommandeNumber += 1 : newCommandeNumber = newCommandeNumber
+
+  }
+
+  return newCommandeNumber
+}
+
+export const sumAccountAdmin = (commandes = [])=>{
+  let inAccount = 0
+
+  commandes.forEach((commande)=>{
+    inAccount += !verifyCommande(commande) && commande.reverse == "0" ? parseInt(commande.price) : 0
+  })
+
+  return inAccount
 }

@@ -1,17 +1,16 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import creditCardTwotone from '@iconify/icons-ant-design/credit-card-twotone';
 // material
 import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
 // utils
-import { fCurrency, fFcfa } from '../../../utils/formatNumber';
+import { fCurrency, fFcfa, sumAccountAdmin } from '../../../utils/formatNumber';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
+import { MotionContainer, varBounceIn, varBounceInDown } from 'src/components/animate';
 // ----------------------------------------------------------------------
-
-const api3 = axios.create({
-  baseURL: `http://localhost/dc/index.php?page=allVente/`
-});
 
 const RootStyle = styled(Card)(({ theme }) => ({
   boxShadow: 'none',
@@ -43,23 +42,20 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 export default function AppBugReports() {
 
-  const [total, seTotal] = useState(0);
-
-  useEffect(()=>{
-    api3.get('/')
-    .then(res => {
-      seTotal(res.data);
-    });
-  })
+  const commandes = useSelector(state => state.commandeReducer)
   return (
-    <RootStyle>
-      <IconWrapperStyle>
-        <Icon icon={creditCardTwotone} width={34} height={34} />
-      </IconWrapperStyle>
-      <Typography variant="h3">{fFcfa(fCurrency(total))}</Typography>
-      <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Votre Compte
-      </Typography>
-    </RootStyle>
+    <MotionContainer initial="initial" open>
+      <motion.div variants={varBounceInDown}>
+        <RootStyle>
+          <IconWrapperStyle>
+            <Icon icon={creditCardTwotone} width={34} height={34} />
+          </IconWrapperStyle>
+          <Typography variant="h3">{fFcfa(fCurrency(sumAccountAdmin(commandes)))}</Typography>
+          <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+            Votre Compte
+          </Typography>
+        </RootStyle>
+      </motion.div>
+    </MotionContainer>
   );
 }

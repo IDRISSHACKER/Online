@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 
 import {applyMiddleware, createStore} from 'redux'
 import {Provider} from 'react-redux'
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 import rootReducer from './reducers'
 import { getPosts } from './action/posts.action';
@@ -22,6 +23,7 @@ import { getUser, getUsers } from './action/user.action';
 import { getSlide } from './action/slider.action';
 import { mostAvisPost } from './action/mostAvisPosts.action';
 import { getCommandes } from './action/Commande.action';
+import { getStatSale } from './action/stat.action';
 
 const store = createStore(
   rootReducer,
@@ -52,13 +54,18 @@ if(localStorage.getItem("id")){
 store.dispatch(
   getCommandes()
 )
+store.dispatch(
+  getStatSale()
+)
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
     <HelmetProvider>
       <BrowserRouter>
         <Provider store={store}>
-          <App />
+          <ParallaxProvider>
+            <App />
+          </ParallaxProvider>
         </Provider>
       </BrowserRouter>
     </HelmetProvider>,
