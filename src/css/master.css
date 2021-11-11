@@ -45,7 +45,18 @@ body{
 
 .price{
 	color: tomato;
-	text-align: left;
+	text-align: left !important;
+	margin-left: 20px !important;
+	padding-left: 0 !important;
+	margin-bottom: 0px !important;
+	padding-bottom: 0px !important;
+}
+
+.rating{
+	color: tomato;
+	text-align: left !important;
+	margin-left: 0px !important;
+	padding-left: 0 !important;
 }
 
 hr{
@@ -65,6 +76,14 @@ hr{
 .custom-select-adm{
 	margin: auto auto;
 	font-size:1rems;
+}
+
+.custom-action{
+
+	margin-bottom: 0px !important;
+	padding-bottom: 0px !important;
+	position: absolute;
+	bottom: 40px;
 }
 
 .ctg{

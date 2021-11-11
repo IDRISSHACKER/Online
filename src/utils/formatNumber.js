@@ -3,6 +3,7 @@ import { replace } from 'lodash';
 import numeral from 'numeral';
 import { $CombinedState } from 'redux';
 import { isEmpty } from './isEmpty';
+import { useSelector } from "react-redux"
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +12,7 @@ export function fCurrency(number) {
 }
 
 export function fFcfa(number) {
-  return  `${fNumber(number)} FCFA`;
+  return `${fNumber(number)} FCFA`;
 }
 
 export function fPercent(number) {
@@ -30,42 +31,42 @@ export function fData(number) {
   return numeral(number).format('0.0 b');
 }
 
-export function sumData(table, key){
+export function sumData(table, key) {
 
-  if (!isEmpty(table)){
+  if (!isEmpty(table)) {
     let total = 0;
 
-    table.forEach((tab)=>total+=tab+`.${key}`)
+    table.forEach((tab) => total += tab + `.${key}`)
 
     return total
 
-  }else{
+  } else {
 
     return 0
   }
 
 }
 
-export function toPercent(data, constant){
+export function toPercent(data, constant) {
 
-    return (constant*100)/data
+  return (constant * 100) / data
 
 }
 
-export function sizeDatas(datas){
+export function sizeDatas(datas) {
 
   let size = 0
 
-  datas.forEach((data)=>size+=1)
+  datas.forEach((data) => size += 1)
 
   return size
 }
 
-export function evaluate(evaluation){
+export function evaluate(evaluation) {
   let total = 0;
   let count = 0;
 
-  evaluation.forEach((eva)=>{
+  evaluation.forEach((eva) => {
 
     total += parseFloat(eva.note)
     count += 1
@@ -73,17 +74,17 @@ export function evaluate(evaluation){
   })
 
 
-  return (total/count)
+  return (total / count)
 
 }
 
-const verifyCommande = (commande = {})=> commande.admin_solved == "0" || commande.user_solved == "0" && commande.reverse == "0" ? 1 : 0 
+const verifyCommande = (commande = {}) => commande.admin_solved == "0" || commande.user_solved == "0" && commande.reverse == "0" ? 1 : 0
 
 
-export const sizeNewCommande = (commandes = [])=>{
+export const sizeNewCommande = (commandes = []) => {
   let newCommandeNumber = 0
 
-  for(let counter in commandes){
+  for (let counter in commandes) {
 
     !isEmpty(commandes) && verifyCommande(commandes[counter]) ? newCommandeNumber += 1 : newCommandeNumber = newCommandeNumber
 
@@ -92,12 +93,26 @@ export const sizeNewCommande = (commandes = [])=>{
   return newCommandeNumber
 }
 
-export const sumAccountAdmin = (commandes = [])=>{
+export const sumAccountAdmin = (commandes = []) => {
   let inAccount = 0
 
-  commandes.forEach((commande)=>{
+  commandes.forEach((commande) => {
     inAccount += !verifyCommande(commande) && commande.reverse == "0" ? parseInt(commande.price) : 0
   })
 
   return inAccount
+}
+
+export const getIfInCard = async (id, cards) => {
+  let essist = false
+
+  if (!isEmpty(cards)) {
+    cards ?? cards.map((card) => {
+      if (card.pId === id) {
+        essist = true
+      }
+    })
+  }
+
+  return essist
 }

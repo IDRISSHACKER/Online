@@ -1,4 +1,4 @@
-import { GET_COMMANDES } from "src/action/Commande.action"
+import { GET_COMMANDES, SET_COMMANDE } from "src/action/Commande.action"
 
 const initialState = []
 

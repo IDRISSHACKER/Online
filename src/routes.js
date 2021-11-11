@@ -8,6 +8,7 @@ import Store from './pages/Store';
 import DashboardApp from './pages/admin/DashboardApp';
 import UploadArticle from "./pages/admin/UploadArticle.js"
 import Users from './pages/admin/Users'
+import Cards from './pages/Cards'
 
 import NavbarLayout from './layouts/store/navbar';
 import AdminNavbarLayout from './layouts/admin/AdminNavbarLayout';
@@ -58,11 +59,19 @@ export default function Router() {
       ]  
     },
     {
+      path: '/store',
+      element: status ? <Navigate to="/store" />  : <Cards />,  
+    },
+    {
 
       path: '/store',
       element: <NavbarLayout />,
       children: [
         {path:'/', element: <Store />},
+        {
+          path: '/card',
+          element: status ? <Cards />  : <Navigate to="/store" />,  
+        },
         {path: ':id', element: <Post />,
          children: [
           {path: "*", element: <Post />},

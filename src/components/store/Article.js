@@ -1,6 +1,6 @@
 import { Spring, useSpring, animated } from "react-spring"
 import {Link as RouterLink} from "react-router-dom"
-import {Card, CardContent, CardMedia, Link, Rating, Typography} from '@material-ui/core'
+import {Card, CardContent, CardMedia, Link, Rating, Typography, Skeleton, CardActions} from '@material-ui/core'
 import settings from "../../_mocks_/settings"
 import {formatTitle} from "../../utils/formatText"
 import {evaluate, fFcfa} from "../../utils/formatNumber"
@@ -46,12 +46,13 @@ export default function Article({post, parent}){
 	return(
 		<Link underline="none" variant="subtitle2" onClick={handleClick} component={RouterLink} to={location}>
 			<Card className="post post-annim">
+				{<Skeleton  variant="rectangular"/> &&
 				<CardMedia
 					title = {post.title}
 					image = {`${infos.init().APP_FOLDER}/img/posts/${post.img}`}
 					className = "apercu"
 					alt = {post.img}
-				/>
+				/>}
 				<CardContent>
 					<Typography gutterBottom variant="h6" component="h2">
 						{formatTitle(post.title,50)}
@@ -61,15 +62,7 @@ export default function Article({post, parent}){
 						<span>{post.category_name}</span>
 					</Link>
 					</Typography>*/}
-					
-					{parseInt(post.showPrice) ?
-						<Typography variant="h5" className="price">
-							{fFcfa(`${post.price}`)}
-						</Typography>
-						:
-						<span></span>
-					}
-					<Typography variant="h5" className="price">
+					<Typography variant="h5" className="rating">
 						{avis === null || avis === 0 ?
 							<span></span>
 							:<Rating name="half-rating" defaultValue={3} value={avis == null ? 0 : parseFloat( avis)} precision={step} readOnly/>
@@ -89,6 +82,15 @@ export default function Article({post, parent}){
 					}
 
 				</CardContent>
+				<CardActions className="custom-action">
+				{parseInt(post.showPrice) ?
+						<Typography variant="h5" className="price">
+							{fFcfa(`${post.price}`)}
+						</Typography>
+						:
+						<span></span>
+					}
+				</CardActions>
 			</Card>
 		</Link>
 	)

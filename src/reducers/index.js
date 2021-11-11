@@ -9,6 +9,7 @@ import slideReducer from "./slide.reducer";
 import mostAvisPostsReducer from "./mostAvisPosts.reducer";
 import commandeReducer from "./commande.reducer";
 import statSaleReducer from "./stateSale.reducer";
+import cardReducer from "./card.reducer";
 
 export default combineReducers({
     postsReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
     slideReducer,
     mostAvisPostsReducer,
     commandeReducer,
-    statSaleReducer
+    statSaleReducer,
+    cardReducer
 })

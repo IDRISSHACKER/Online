@@ -28,6 +28,8 @@
     ]
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^31.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.3",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -53,6 +55,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "history": "^5.0.0",
+    "html-react-parser": "^1.4.0",
     "image-upload-react": "^1.4.9",
     "install": "^0.13.0",
     "lodash": "^4.17.21",

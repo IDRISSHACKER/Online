@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Rating, Slide, TextField, Typography} from "@material-ui/core"
 import { useDispatch } from 'react-redux';
 import { getAvis, setAvi as setAvis } from 'src/action/avis.action';
+import { getPosts } from 'src/action/posts.action';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -42,7 +43,7 @@ export default function Modal({opened, post}) {
     if(note && motif && avi){
 
       if(dispatch(setAvis(data))){
-
+        dispatch(getPosts())
         setNote("")
         setAvi("")
         setMotif("")

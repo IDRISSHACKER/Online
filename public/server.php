@@ -155,7 +155,15 @@ if($page === "home/" OR $page === "home"){
 
 	Commande::getCommandes();
 
+}else if($page === "setCommande/" OR $page === "setCommande"){
+
+	Commande::setCommande();
+
 }else if($page === "statSale/" OR $page === "statSale"){
 
 	ChartSale::chartSaleByDay();
+
+}else if($page === "getCard/" OR $page === "getCard"){
+
+	Commande::getCommande();
 }
