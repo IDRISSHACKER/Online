@@ -11,6 +11,7 @@ import { getAvis } from "src/action/avis.action"
 import { isEmpty } from "src/utils/isEmpty"
 import { useState } from "react"
 import { getPostsByCtg } from "src/action/likeCtg.action"
+import { getInCard } from "src/action/inCard.action"
 
 const infos = new settings()
 

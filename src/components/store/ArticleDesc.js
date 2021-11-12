@@ -79,20 +79,8 @@ export default function ArticleDesc({ Desc, avisp }) {
 		}
 
 	}
-	useEffect(() => {
-
-		setTimeout(() => {
-			let verify = false
-			!isEmpty(cards) && cards.map((card) => {
-				if (card.pId === Desc.id) {
-					verify = true
-				}
-			})
-
-			verify ? setInCard(true) : setInCard(false)
-		}, 200)
-
-	}, [Desc.id])
+	
+	let card = !isEmpty(cards) && cards.find((elem)=>parseInt(elem.pId)===parseInt(Desc.id))
 
 	const handleCloseLoad = () => {
 		setOpenLoad(false);
@@ -140,7 +128,7 @@ export default function ArticleDesc({ Desc, avisp }) {
 						<span></span>
 					}
 					<div>
-						<Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleClose}>
+						<Snackbar open={openSuccess} autoHideDuration={1000} onClose={handleClose}>
 							<Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
 								{Desc.title} ajouté au panier
 							</Alert>
@@ -168,8 +156,8 @@ export default function ArticleDesc({ Desc, avisp }) {
 							color="error"
 						>supression</LoadingButton>
 						:
-						<div>
-							{!inCard ?
+						<span fullWidth>
+							{!card ?
 								<Button
 									startIcon={<ShoppingCartOutlined />}
 									fullWidth
@@ -192,7 +180,7 @@ export default function ArticleDesc({ Desc, avisp }) {
 									Acceder au panier
 								</Button>
 							}
-						</div>
+						</span>
 					}
 				</Stack>
 			</div>

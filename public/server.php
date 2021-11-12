@@ -166,4 +166,12 @@ if($page === "home/" OR $page === "home"){
 }else if($page === "getCard/" OR $page === "getCard"){
 
 	Commande::getCommande();
+
+}else if($page === "removeCommande/" OR $page === "removeCommande"){
+
+	Commande::removeCommande();
+	
+}else if($page === "updateQtt/" OR $page === "updateQtt"){
+
+	Commande::updateQtt();
 }

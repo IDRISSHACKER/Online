@@ -46,7 +46,7 @@ function Post() {
 
 
 	const dis = ()=>{
-		return dispatch(getAvis(id))
+		dispatch(getAvis(id))
 	}
 
 

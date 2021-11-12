@@ -90,7 +90,40 @@ class Commande extends Table
         INNER JOIN category
         ON articles.category_id = category.id 
         WHERE user_solved = 0 
-        AND user_id = $users_id"));
+        AND user_id = $users_id
+        ORDER BY commande.id DESC
+        "));
+
+    }
+
+    public static function verifyIfPostInCard(){
+
+        $post_id = $_POST['id'];
+        $user_id = $_POST['user_id'];
+
+        echo json_encode(self::query("SELECT count(*) AS nb FROM commandes WHERE user_id = ? AND post_id = ?", [$post_id, $user_id]));
+        
+    }
+
+    public static function removeCommande(){
+
+        $post_id = $_POST["post_id"];
+        $user_id = $_POST["user_id"];
+
+        self::del("DELETE FROM commande WHERE user_id = ? AND id = ?", [$user_id, $post_id]);
+
+        self::getCommande();
+    }
+
+
+    public static function updateQtt(){
+        $post_id = $_POST["post_id"];
+        $user_id = $_POST["user_id"];
+        $qtt     = $_POST["qtt"];
+
+        self::save("UPDATE commande SET qtt = $qtt WHERE user_id = ? AND id = ?", [$user_id, $post_id]);
+
+        self::getCommande();
 
     }
 

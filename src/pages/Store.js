@@ -28,10 +28,10 @@ function Store() {
 	return <div>
 		<Page title="Store | hardware, software">
 			<div>
-				<Parallax className="custom-class" y={[-20, 0]} tagOuter="div">
+				<Parallax className="custom-class" y={[-40, 0]} tagOuter="div">
 					<HomeCaroussel />
 				</Parallax>
-				<Parallax className="custom-class" y={[0, -20]} tagOuter="div">
+				<Parallax className="custom-class" y={[0, -40]} tagOuter="div">
 					<div style={{ background: "white" }}>
 						<Container maxWidth="lg">
 							<Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
@@ -43,7 +43,7 @@ function Store() {
 					</div>
 				</Parallax>
 				<Container maxWidth="lg">
-					<Parallax className="custom-class" y={[20, -20]} tagOuter="div">
+					<Parallax className="custom-class" y={[40, -40]} tagOuter="div">
 						<br />
 						<Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
 							<Typography variant="h3">Les articles les plus populaire</Typography>
