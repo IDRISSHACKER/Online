@@ -1,10 +1,9 @@
-import React,{useState} from "react"
+import React,{useState, useEffect} from "react"
 import { Grid, Card, Stack, Link, Container, Typography, Chip,TextFiel, Button, TextField, CardHeader, Breadcrumbs, Rating } from '@material-ui/core'
 import settings from "../_mocks_/settings"
 import { getIdInUrl } from "../utils/formatText"
 import axios from "axios"
 import Page from "../components/Page"
-import Loading from "../utils/Loading"
 import ArticleImg from "../components/store/ArticleImg"
 import ArticleDesc from "../components/store/ArticleDesc"
 import Breadcrumb from "../layouts/store/Breadcrumb"
@@ -20,6 +19,7 @@ import Modal from "../components/store/Modal"
 import { MessageOutlined } from "@mui/icons-material"
 import LikeCtgCaroussel from "src/components/store/likeCtg.caroussel"
 import { useNavigate } from "react-router-dom"
+import Loading from "src/utils/Loading"
 //import "../css/master.scss"
 
 const infos = new settings()
@@ -28,41 +28,35 @@ function Post() {
 
 	const dispatch = useDispatch()
 
-	const [load, setLoad] = useState("1")
+	const [load, setLoad] = useState(true)
 	const [open, setOpen] = useState(false)
 	const navigate        = useNavigate()  
+	const [post, setPost] = useState()
 
 	const posts = useSelector(state => state.postsReducer)
 
 	let id = getIdInUrl(window.location.href)
 
-	typeof id !== 'number' ? navigate("/404") : id = id
-
+	typeof id !== 'number' ? navigate("/products/0-all") : id = id
 
 	const setOpened =  function(value = true){
 		setOpen(value)
 		return value
 	}
 
-
-	const dis = ()=>{
+	useEffect(() => {
 		dispatch(getAvis(id))
-	}
-
-
-	let post = !isEmpty(posts) && posts.find((elem)=>parseInt(elem.id)===parseInt(id))
-
-	post == undefined ? navigate("/404") : post = post
+	}, [id])
+		
+	let article = !isEmpty(posts) && posts.find((elem)=>parseInt(elem.id)===parseInt(id))
 	
+	useEffect(() => {
+		!isEmpty(posts) && setPost(article)
+		!isEmpty(posts) && setLoad(false)
+	}, [article])
 
-	let re = setTimeout(function(){
-		if(load == "1"){
-			dis()
-		}
-		setLoad("")
-		clearTimeout(re)
-
-	},500)
+	article == undefined ? navigate("/404") : article = article
+	
 
 	const handlerRating = (ev)=>{
 		const connected = localStorage.getItem("connected") ? parseInt(localStorage.getItem("connected")) : 0
@@ -81,7 +75,8 @@ function Post() {
 	const avis = useSelector(state=>state.aviReducer)
 
 	return <div>
-		{isEmpty(post) === false ?
+
+		{!load ?
 		<Page title={post.title}>
 			<Container maxWidth="lg">
 				<br />
@@ -99,9 +94,8 @@ function Post() {
 								<ArticleDesc Desc={post} avisp={avis} setOpene={setOpened}/>
 							</Grid>
 							<Grid item md={12} xs={12} sm={12}>
-								{load === "0" || load == "" ?
-									<LikeCtgCaroussel ctgId={post.ctgId} post_id={post.id} />:
-									<div>loading...</div>
+								{!isEmpty(posts) &&
+									<LikeCtgCaroussel ctgId={post.ctgId} post_id={post.id} />
 								}
 							</Grid>
 							<Grid item md={12} xs={12} sm={12}>
@@ -135,7 +129,9 @@ function Post() {
 					</div>
 			</Container>
 		</Page>:
-		<div>loading0...</div>
+		<div>
+			<Loading />
+		</div>
 		}
 	</div>
 }

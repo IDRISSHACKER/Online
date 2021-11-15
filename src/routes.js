@@ -22,6 +22,8 @@ import CreateSlide from './pages/admin/crateSlide';
 import DashboardLayout from './layouts/dashboard';
 import PostList from './pages/admin/PostList';
 import EditArticle from './pages/admin/EditArticle';
+import Posts from './pages/Posts';
+import PostsCtg from './pages/PostsCtg';
 
 // ----------------------------------------------------------------------
 
@@ -71,6 +73,16 @@ export default function Router() {
         {
           path: '/card',
           element: status ? <Cards />  : <Navigate to="/store" />,  
+        },
+        {
+          path: '/products',
+          element: <Posts />,  
+          children: [
+            {
+              path: "/:id",
+              element: <Posts />
+            },
+          ]
         },
         {path: ':id', element: <Post />,
          children: [

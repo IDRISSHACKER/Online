@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -138,11 +138,17 @@ function AlertEdit({ post }) {
     const [openSuccess, setOpenSuccess] = useState(false)
     const [openError, setOpenError] = useState(false)
     const [open, setOpen] = useState(false)
-    const [title, setTitle] = useState(post.stitle)
-    const [desc, setDesc] = useState(post.description)
-    const [postId, setPostId] = useState(post.pId)
+    const [title, setTitle] = useState()
+    const [desc, setDesc] = useState()
+    const [postId, setPostId] = useState()
     const dispatch = useDispatch()
     const posts = useSelector(state => state.postsReducer)
+
+    useEffect(() => {
+        setTitle(post.stitle)
+        setDesc(post.description)
+        setPostId(post.pId)
+    }, [post.id])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -235,13 +241,13 @@ function AlertEdit({ post }) {
                                     id="ctg_select"
                                     onChange={e => setPostId(e.target.value)}
                                 >
-                                    {!isEmpty(posts) && posts.map((post, index) => (
+                                    {!isEmpty(posts) && posts.map((ppost, index) => (
                                         <option
                                             key={index}
-                                            name={post.id}
-                                            value={post.id}
+                                            name={ppost.id}
+                                            value={ppost.id}
                                         >
-                                            {post.title}
+                                            {ppost.title}
                                         </option>
                                     ))}
                                 </select>

@@ -14,15 +14,11 @@ class Slider extends Table
         $image = $_POST['image'];
         $post_id = $_POST['post_id'];
 
-        if(self::save("INSERT INTO 
-            Slider(post_id, img, title, description) 
-            VALUES(?,?,?,?)",
-        [$post_id, $image, $title, $description]
-       )){
+        self::save("INSERT INTO Slider(post_id, img, title, description) VALUES(?,?,?,?)",[$post_id, $image, $title, $description]);
 
         self::getSlide();
 
-       }
+       
 
     }
 
@@ -53,7 +49,7 @@ class Slider extends Table
         $id          = $_POST['id'];
         $pId         = $_POST['pId'];
 
-        self::save("UPDATE `slider` SET `slider`.`post_id` = ?, `slider`.`title` = ?, `slider`.`description` = ? WHERE `slider`.`id` = '$id'",[$pId, $title, $description]);
+        self::save("UPDATE `slider` SET `slider`.`post_id` = ?, `slider`.`title` = ?, `slider`.`description` = ? WHERE `slider`.`id` = '$id' AND `slider`.`post_id` = '$pId'",[$pId, $title, $description]);
 
         self::getSlide();
     }

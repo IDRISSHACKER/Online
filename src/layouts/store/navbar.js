@@ -4,6 +4,7 @@ import Logo from '../../components/Logo';
 import { Link as RouterLink } from 'react-router-dom';
 import AccountPopover from "./AccountPopover"
 import CardPopover from './CardPopover';
+import ProductsPopover from './ProductsPopover';
 
 const useStyles = experimentalStyled({
 	appbar: {
@@ -21,6 +22,9 @@ export default function NavbarLayout({ children }) {
 					<RouterLink to="/store">
 						<Logo />
 					</RouterLink>
+					<Stack style={{marginLeft: "20px"}} direction="right" spacing={{ xs: 0.5, sm: 1.5 }}>
+						<ProductsPopover />
+					</Stack>
 					<Stack className="right" direction="left" spacing={{ xs: 0.5, sm: 1.5 }}>
 						{status === 1 ?
 							<div>

@@ -1,6 +1,6 @@
 import { forwardRef, useState, useEffect } from 'react';
 import { Link as RouterLink } from "react-router-dom"
-
+import { sub, formatDistanceToNow } from 'date-fns';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
@@ -282,7 +282,7 @@ export default function UsersRows({ user }) {
                 {user.role}
             </TableCell>
             <TableCell component="th" scope="row">
-                {user.created_at}
+                {formatDistanceToNow(new Date(user.created_at))}
             </TableCell>
             <TableCell align="right">
                 <Stack direction="row" alignItems="center" justifyContent="space-between">

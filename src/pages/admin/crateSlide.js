@@ -118,9 +118,6 @@ function createSlide() {
 		setPostId(e.target.value)
 		setPostId(e.target.value)
 		setPostId(e.target.value)
-
-		console.log(">current state : ", e.target.value)
-		console.log("<prevent state : ", post_id)
 	}
 
 	return <div>

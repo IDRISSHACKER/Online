@@ -14,6 +14,7 @@ class Article extends Table
 
     public static function get_articles()
     {
+        //sleep(3);
         return self::query("SELECT 
         articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, articles.category_id AS ctgId, 
         category.category_name, articles.created_at, 
@@ -93,6 +94,33 @@ class Article extends Table
             ");
         } else {
             return [];
+        }
+    }
+
+    public static function getCtg()
+    {
+        $ctg_id = $_POST['ctg_id'];
+
+        if (isset($ctg_id) and !empty($ctg_id)) {
+
+           // return self::query("SELECT articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, category.category_name FROM articles INNER JOIN category ON category.id = articles.category_id WHERE category.id = $ctg_id AND articles.id != $id");
+
+            echo json_encode(self::query("SELECT 
+                articles.id, articles.title, articles.slug, articles.img, articles.price, articles.qtt, articles.description, articles.category_id AS ctgId, 
+                category.category_name, articles.created_at, 
+                AVG(avis.note) AS notes,
+                COUNT(avis.note) as navis,
+                articles.isSoftware,
+                articles.showPrice
+                FROM avis 
+                RIGHT JOIN articles 
+                ON articles.id = avis.post_id 
+                INNER JOIN category 
+                ON category.id = articles.category_id
+                WHERE category.id = $ctg_id
+                GROUP BY articles.id
+                ORDER BY articles.id DESC
+            "));
         }
     }
 

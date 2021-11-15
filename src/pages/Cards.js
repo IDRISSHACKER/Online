@@ -32,6 +32,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import PaypalPayement from "src/components/Payement/Paypal.payement"
 //import "../css/master.scss"
 const infos = new settings()
 
@@ -204,6 +205,11 @@ function Cards() {
 		}
 	}
 
+	const cards = useSelector(state => state.cardReducer)
+
+    let total = 0
+    let totals = !isEmpty(cards) && cards.map((card) => total += (parseInt(card.price) * parseInt(card.commandeQtt)))
+
 
 	return <div>
 		<Page title="Votre panier">
@@ -222,6 +228,11 @@ function Cards() {
 					</Stack>
 					{active === 0 &&
 						<Paniers onStep={setStep} />
+					}
+					{active === 1 &&
+
+						<PaypalPayement order={total} />
+							
 					}
 				</div>
 			</Container>

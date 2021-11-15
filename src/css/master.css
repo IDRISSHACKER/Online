@@ -255,3 +255,24 @@ hr{
 	height: 300px !important;
 	width: auto;
 }
+
+.custom-card-img{
+
+	width: 60px !important;
+	height: auto !important;
+}
+
+.custom-load{
+
+	width: 100%;
+	height: 100%;
+	height: auto;
+	margin: auto;
+	padding: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
+	margin-top: 5%;
+
+}

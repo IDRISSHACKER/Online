@@ -81,7 +81,8 @@ class Commande extends Table
         commande.user_solved,
         commande.reverse,
         commande.admin_solved,
-        commande.qtt as commandeQtt
+        commande.qtt as commandeQtt,
+        commande.created_at
         FROM commande
         INNER JOIN users
         ON commande.user_id = users.id

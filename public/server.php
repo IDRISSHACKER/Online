@@ -22,7 +22,6 @@ use App\table\Slider;
 use App\table\Commande;
 use App\table\ChartSale;
 
-
 $page = "";
 
 if (!empty($_GET["page"])) {
@@ -174,4 +173,8 @@ if($page === "home/" OR $page === "home"){
 }else if($page === "updateQtt/" OR $page === "updateQtt"){
 
 	Commande::updateQtt();
+}else if($page === "getPostCtg/" OR $page === "getPostCtg"){
+
+	Article::getCtg();
+
 }

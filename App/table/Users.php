@@ -16,7 +16,7 @@ class Users extends Table{
     }
 
     public static function getUsers(){
-        $users = self::query("SELECT users.id, users.name, users.surname, users.pseudo, users.email, users.tel, users.password, users.created_at, users.updated_at, roles.role_name as role FROM users LEFT JOIN roles ON users.role_id = roles.id");
+        $users = self::query("SELECT users.id, users.name, users.surname, users.pseudo, users.email, users.tel, users.password, users.created_at, users.updated_at, roles.role_name as role FROM users LEFT JOIN roles ON users.role_id = roles.id ORDER BY users.id DESC");
 
         echo json_encode($users);
     }

@@ -11,6 +11,7 @@ import commandeReducer from "./commande.reducer";
 import statSaleReducer from "./stateSale.reducer";
 import cardReducer from "./card.reducer";
 import inCardReducer from "./inCard.reducer";
+import getPostCtgReducer from "./getPostCtg.reducer"
 
 export default combineReducers({
     postsReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
     commandeReducer,
     statSaleReducer,
     cardReducer,
-    inCardReducer
+    inCardReducer,
+    getPostCtgReducer
 })

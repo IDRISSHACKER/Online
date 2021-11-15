@@ -34,28 +34,26 @@ export default function Paniers({ onStep }) {
         </Stack>
         <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={9} lg={8}>
-                <Card>
-                    <CardContent>
-                        <TableContainer component={Paper}>
-                            <Table aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Nom de l'article</TableCell>
-                                        <TableCell>Quantité</TableCell>
-                                        <TableCell>PU</TableCell>
-                                        <TableCell>PT</TableCell>
-                                        <TableCell align="right">Action</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {!isEmpty(cards) && cards.map((card, index) => (
-                                        <Panier post={card} key={index} />
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </CardContent>
-                </Card>
+
+                <TableContainer component={Paper} elevation={5}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nom de l'article</TableCell>
+                                <TableCell>Quantité</TableCell>
+                                <TableCell>PU</TableCell>
+                                <TableCell>PT</TableCell>
+                                <TableCell align="right">Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {!isEmpty(cards) && cards.map((card, index) => (
+                                <Panier post={card} key={index} />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
                 <Card>
