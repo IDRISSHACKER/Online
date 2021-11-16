@@ -5,6 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import AccountPopover from "./AccountPopover"
 import CardPopover from './CardPopover';
 import ProductsPopover from './ProductsPopover';
+import SearchBarPopover from './SearchBarPopover';
 
 const useStyles = experimentalStyled({
 	appbar: {
@@ -24,6 +25,7 @@ export default function NavbarLayout({ children }) {
 					</RouterLink>
 					<Stack style={{marginLeft: "20px"}} direction="right" spacing={{ xs: 0.5, sm: 1.5 }}>
 						<ProductsPopover />
+						<SearchBarPopover />
 					</Stack>
 					<Stack className="right" direction="left" spacing={{ xs: 0.5, sm: 1.5 }}>
 						{status === 1 ?

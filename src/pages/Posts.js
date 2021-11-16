@@ -15,6 +15,7 @@ import { getIdInUrl } from "../utils/formatText"
 import { getPostCtg } from "src/action/postCtg.action"
 import { random } from "lodash"
 import { ListAltOutlined, ListAltSharp, TitleRounded, StorefrontOutlined, Store, AppsOutlined } from "@mui/icons-material"
+import searchBarPopover from "src/layouts/store/SearchBarPopover"
 
 
 const infos = new settings()
@@ -56,23 +57,23 @@ function Posts() {
             setCurentPosts(dataPosts.length > perPage ? dataPosts.slice(0, perPage) : dataPosts)
             setLoadPost(false)
 
-            if(dataPosts.length > perPage){
+            if (dataPosts.length > perPage) {
                 setEndPage(false)
-            }else{
+            } else {
                 setEndPage(true)
             }
 
-            if(dataPosts.length === 0){
+            if (dataPosts.length === 0) {
                 setLoadPost(false)
                 setTitle("Empty")
                 setCurentPosts([])
             }
 
             id == 0 || isEmpty(currentPosts) ? setTitle("Produits") : !isEmpty(currentPosts) && setTitle(currentPosts[0].category_name)
-            
+
         }
         !isEmpty(dataPosts) && getArticles()
-    }, [dataPosts,id])
+    }, [dataPosts, id])
 
     const dataCtg = useSelector(state => state.ctgReducer)
     useEffect(() => {
@@ -92,7 +93,7 @@ function Posts() {
         setRefresh(random())
     }
 
-    return <Page title={id == 0 || isEmpty(currentPosts) ? "Produits" : !isEmpty(currentPosts) && currentPosts[0].category_name }>
+    return <Page title={id == 0 || isEmpty(currentPosts) ? "Produits" : !isEmpty(currentPosts) && currentPosts[0].category_name}>
         {loadPosts && loadCategories ?
             <Loading />
             :
@@ -104,13 +105,20 @@ function Posts() {
                         <LinearProgress />
                     </span>
                     :
-                    categories.map((ctg, index) => (
-                        <Chip color={id == ctg.id ? "success" : "default"} onClick={handleLoad} component={RouterLink} to={`/store/products/${ctg.id}-${ctg.category_name}`} key={index} label={ctg.category_name} />
-                    ))}
+                    <div>
+                        {categories.map((ctg, index) => (
+                            <Chip color={id == ctg.id ? "success" : "default"} onClick={handleLoad} component={RouterLink} to={`/store/products/${ctg.id}-${ctg.category_name}`} key={index} label={ctg.category_name} />
+                        ))}
+
+                        <div>
+                            <searchBarPopover />
+                        </div>
+                    </div>
+                }
                 <br /><br />
                 <Divider textAlign="left">
                     <Typography variant="h3">
-                       <AppsOutlined />  {id == 0 || isEmpty(currentPosts) ? "Tous les articles" : currentPosts[0].category_name}
+                        <AppsOutlined />  {id == 0 || isEmpty(currentPosts) ? "Tous les articles" : currentPosts[0].category_name}
                     </Typography>
                 </Divider>
                 <div style={{ marginTop: "30px" }}>
