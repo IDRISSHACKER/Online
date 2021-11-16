@@ -2,7 +2,7 @@
 
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-> Free React Admin Dashboard made with Material-UI components and React.
+> online shopping with admin template
 
 ![preview](public/static/preview.png)
 
